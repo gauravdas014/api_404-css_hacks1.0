@@ -1,7 +1,6 @@
 const Hospital = require('../models/hospitalModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const generateOtp = require('../utils/generateOtp');
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -28,7 +27,6 @@ const createSendToken = async (user, statusCode, req, res) => {
 
 exports.signup = async (req, res) => {
   try {
-    const OTP = generateOtp.generateOtp(5);
     const newHospital = await Hospital.create({
       name: req.body.name,
       phone: req.body.phone,
@@ -51,25 +49,27 @@ exports.signup = async (req, res) => {
 
 exports.signin = async (req, res) => {
   try {
-    const userId = req.body.userId;
-    const password = req.body.password;
-    const reg = /^\d+$/;
-    if (reg.test(userId)) {
-      const user = await User.findOne({ phone: userId }).select('+password');
-      if (!user || !(await user.correctPassword(password, user.password))) {
-        res.send('Username or password is incorrect');
-      }
-      res.status(200).json({
-        status: 'success',
-        user: user,
-      });
-    } else {
-      const user = await User.findOne({ email: userId }).select('+password');
-      if (!user || !(await user.correctPassword(password, user.password))) {
-        res.send('Username or password is incorrect');
-      }
-      createSendToken(user, 200, req, res);
+    const hospital = await Hospital.findOne({ email: req.body.email });
+    if (
+      !hospital ||
+      !(await hospital.correctPassword(req.body.password, hospital.password))
+    ) {
+      res.send('Email or password is incorrect');
     }
+    createSendToken(hospital, 200, req, res);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({
+      status: 'fail',
+      message: err,
+    });
+  }
+};
+
+exports.signout = async (req, res) => {
+  try {
+    res.clearCookie('jwt');
+    res.redirect('/');
   } catch (err) {
     res.status(400).json({
       status: 'fail',
