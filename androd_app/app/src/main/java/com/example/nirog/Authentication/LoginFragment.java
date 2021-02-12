@@ -99,7 +99,7 @@ public class LoginFragment extends Fragment {
                         }
                         else{
                             binding.progresslogin.setVisibility(View.INVISIBLE);
-                            Toast.makeText(getActivity(),"Error in Login!",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getActivity(),"Error in Login!",Toast.LENGTH_SHORT).show();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
