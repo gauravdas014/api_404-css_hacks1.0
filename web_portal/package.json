@@ -5,6 +5,10 @@
   "repository": "https://github.com/gauravdas014/api_404-css_hacks1.0",
   "author": "api_404",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
   "private": false,
   "dependencies": {
     "bcryptjs": "^2.4.3",
