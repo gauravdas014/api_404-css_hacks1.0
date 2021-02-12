@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
-// const viewRouter = require('./routes/viewRoutes');
-// const authRouter = require('./routes/authRoutes');
+// const userRouter = require('./routes/userRoutes');
+const viewRouter = require('./routes/viewRoutes');
+const authRouter = require('./routes/authRoutes');
 
 const app = express();
 
@@ -16,7 +17,7 @@ app.get('/', (req, res) => {
   res.render('portal/homepage');
 });
 
-// app.use('/', viewRouter);
+app.use('/', viewRouter);
 // app.use('/auth', authRouter);
 
 module.exports = app;
