@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.nirog.Account.ChildInputDetailsFragment;
 import com.example.nirog.R;
 import com.example.nirog.databinding.FragmentLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,6 +30,7 @@ public class LoginFragment extends Fragment {
 
     private SignupFragment signupFragment;
     private ForgotPasswordFragment forgotPasswordFragment;
+    private ChildInputDetailsFragment childInputDetailsFragment;
     private FirebaseAuth mAuth;
 
 
@@ -41,6 +43,7 @@ public class LoginFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         signupFragment = new SignupFragment();
         forgotPasswordFragment = new ForgotPasswordFragment();
+        childInputDetailsFragment = new ChildInputDetailsFragment();
 
         binding.signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,26 +91,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void logincheck() {
-        mAuth.signInWithEmailAndPassword(binding.email.getText().toString(),binding.password.getText().toString())
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            binding.progresslogin.setVisibility(View.INVISIBLE);
-                            Toast.makeText(getActivity(),"Login Successfull",Toast.LENGTH_SHORT).show();
-                            //setFragmentNoBackStack(new BottomNavFragment());
-                        }
-                        else{
-                            binding.progresslogin.setVisibility(View.INVISIBLE);
-                            //Toast.makeText(getActivity(),"Error in Login!",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(),""+e.toString(),Toast.LENGTH_SHORT).show();
-            }
-        });
+      //.......apicode.....
     }
 
 
