@@ -61,7 +61,7 @@ public class ChildInputDetailsFragment extends Fragment implements DatePickerDia
 
 
         // date picker for the child on clicking the edit text
-        binding.ageInYrsTextiplayout.setOnClickListener(new View.OnClickListener() {
+        binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DialogFragment datePicker = new DatePickerFragment();

@@ -37,7 +37,7 @@ public class HospitalListAdapter extends RecyclerView.Adapter<HospitalListAdapte
     public void onBindViewHolder(@NonNull HospitalViewHolder holder, int position) {
         HospitalDetails currentItem = hospitalRowItem.get(position);
         holder.hospitalName.setText(currentItem.getName());
-        holder.hospitalInfo.setText(currentItem.getPhone() + "\n" + currentItem.getAddress());
+        holder.hospitalInfo.setText("Phone : " + currentItem.getPhone() + "\n" + "Address : " + currentItem.getAddress());
 
         //code to load image in recycler view
         String url = currentItem.getImage();

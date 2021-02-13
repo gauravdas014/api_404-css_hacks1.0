@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
+import com.example.nirog.Account.ChildInputDetailsFragment;
 import com.example.nirog.MainDestinations.BottomNavFragment;
 import com.example.nirog.Splash.SplashFragment;
 import com.example.nirog.databinding.ActivityMainBinding;

@@ -1,6 +1,7 @@
 package com.example.nirog.ViewModel;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -80,14 +81,17 @@ public class HospitalViewModel extends AndroidViewModel {
 
                 if(response.code()<300){
                     hosDetailsRes.postValue(response.body());
+                    Log.d("Hospital", String.valueOf(response.code())+" : success");
                 }else if(response.code()>400){
                     hosDetailsRes.postValue(null);
+                    Log.d("Hospital", String.valueOf(response.code())+" : failed");
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseHosDetails> call, Throwable t) {
                 hosDetailsRes.postValue(null);
+                Log.d("Hospital", String.valueOf(t)+" : failed");
             }
         });
     }
