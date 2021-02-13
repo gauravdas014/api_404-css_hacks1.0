@@ -3,6 +3,7 @@ package com.example.nirog.MainDestinations.Hospital;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
@@ -10,11 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.nirog.R;
 import com.example.nirog.ViewModel.HospitalViewModel;
 import com.example.nirog.databinding.FragmentHospitalBinding;
 
 
-public class HospitalFragment extends Fragment {
+public class HospitalFragment extends Fragment implements HospitalListAdapter.OnCardClick {
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -72,7 +74,7 @@ public class HospitalFragment extends Fragment {
         //getting the response
         viewModel.getAllHosDetailsRes().observe(this, data->{
             if(data != null){
-                adapter = new HospitalListAdapter(data.getHospitalDetailsList(), getContext());
+                adapter = new HospitalListAdapter(data.getHospitalDetailsList(), getContext(), this::onClick);
                 binding.hospitalListRecyclerView.setAdapter(adapter);
             }else{
                 Toast.makeText(getContext(), "There is some error", Toast.LENGTH_SHORT).show();
@@ -88,5 +90,14 @@ public class HospitalFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onClick(int position, String hospitalName, String contact, String address, String id) {
+        HospitalDetailsFragment hospitalDetailsFragment = HospitalDetailsFragment.newInstance(hospitalName, address, contact, id, position);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, hospitalDetailsFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

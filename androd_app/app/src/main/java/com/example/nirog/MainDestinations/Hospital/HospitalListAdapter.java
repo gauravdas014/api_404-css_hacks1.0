@@ -21,10 +21,12 @@ public class HospitalListAdapter extends RecyclerView.Adapter<HospitalListAdapte
 
     List<HospitalDetails> hospitalRowItem;
     Context context;
+    OnCardClick onCardClick;
 
-    public HospitalListAdapter(List<HospitalDetails> hospitalRowItem, Context context) {
+    public HospitalListAdapter(List<HospitalDetails> hospitalRowItem, Context context, OnCardClick onCardClick) {
         this.hospitalRowItem = hospitalRowItem;
         this.context = context;
+        this.onCardClick = onCardClick;
     }
 
     @NonNull
@@ -49,6 +51,18 @@ public class HospitalListAdapter extends RecyclerView.Adapter<HospitalListAdapte
                 .placeholder(R.drawable.placeholder_drawable)
                 .into(holder.hospitalImage);
 
+        //handling click events on card view
+        holder.hospitalCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onCardClick.onClick(position,
+                        currentItem.getName(),
+                        currentItem.getPhone(),
+                        currentItem.getAddress(),
+                        currentItem.get_id());
+            }
+        });
+
     }
 
     @Override
@@ -71,6 +85,10 @@ public class HospitalListAdapter extends RecyclerView.Adapter<HospitalListAdapte
             hospitalName = itemView.findViewById(R.id.hospital_name);
             hospitalInfo = itemView.findViewById(R.id.hospital_additional_info);
         }
+    }
+
+    public interface OnCardClick{
+        public void onClick(int position, String hospitalName, String contact, String address, String id);
     }
 
 
