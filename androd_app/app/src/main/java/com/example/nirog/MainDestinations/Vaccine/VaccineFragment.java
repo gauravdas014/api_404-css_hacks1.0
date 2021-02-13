@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.nirog.Account.ChildInputDetailsFragment;
 import com.example.nirog.Authentication.LoginFragment;
 import com.example.nirog.MainDestinations.Hospital.HospitalListAdapter;
 import com.example.nirog.R;
@@ -73,6 +74,7 @@ public class VaccineFragment extends Fragment {
         sharedPrefs= PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         hospitalViewModel.getAllVaccines();
+        retrieveBabyData();
 
         binding.babyNameTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +99,26 @@ public class VaccineFragment extends Fragment {
 
         return binding.getRoot();
 
+    }
+
+    private void retrieveBabyData() {
+        String userId = sharedPrefs.getString("User_id",null);
+        hospitalViewModel.Get_Baby_Data(userId);
+        hospitalViewModel.getGetBabyDataResponse().observe(this, data->{
+            if(data != null){
+                String name = data.getBaby_details().getName();
+                String Father = data.getBaby_details().getFatherName();
+                String Mother = data.getBaby_details().getMotherName();
+                String Year = data.getBaby_details().getAge();
+                Toast.makeText(getActivity(),""+name+""+Father+""+Mother+""+Year,Toast.LENGTH_SHORT).show();
+                binding.babyNameTv.setText(name);
+                binding.babyFatherTv.setText(Father);
+                binding.babyMotherTv.setText(Mother);
+                binding.babyYearTv.setText(Year);
+            }else{
+                Toast.makeText(getContext(), "There is some error", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void setFragment(Fragment fragment) {

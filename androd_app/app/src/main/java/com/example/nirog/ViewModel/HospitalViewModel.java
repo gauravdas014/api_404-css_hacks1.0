@@ -40,6 +40,7 @@ public class HospitalViewModel extends AndroidViewModel {
     private MutableLiveData<ResponseLogin> LoginResponse;
     private MutableLiveData<ResponseGet_user> get_userResponse;
     private MutableLiveData<RespomseBabyData> getbabyResponse;
+    private MutableLiveData<RespomseBabyData> getBabyDataResponse;
 
 
 
@@ -56,6 +57,7 @@ public class HospitalViewModel extends AndroidViewModel {
         LoginResponse = new MutableLiveData<ResponseLogin>();
         get_userResponse = new MutableLiveData<ResponseGet_user>();
         getbabyResponse = new MutableLiveData<RespomseBabyData>();
+        getBabyDataResponse = new MutableLiveData<RespomseBabyData>();
     }
 
     public MutableLiveData<ResponseHosDetails> getAllHosDetailsRes()
@@ -100,6 +102,7 @@ public class HospitalViewModel extends AndroidViewModel {
         return LoginResponse;
     }
     public MutableLiveData<RespomseBabyData> getGetbabyResponse() { return getbabyResponse; }
+    public MutableLiveData<RespomseBabyData> getGetBabyDataResponse() { return getBabyDataResponse; }
 
 
     public void getAllHospitals()
@@ -306,4 +309,27 @@ public class HospitalViewModel extends AndroidViewModel {
             }
         });
     }
+
+    public void Get_Baby_Data(String id)
+    {
+        apiHelper.RetriveBabyData(id).enqueue(new Callback<RespomseBabyData>() {
+            @Override
+            public void onResponse(Call<RespomseBabyData> call, Response<RespomseBabyData> response) {
+                if(response.code()<300){
+                    getbabyResponse.postValue(response.body());
+                    Log.i("Api response: ",""+response.code());
+                }
+                else{
+                    getbabyResponse.postValue(null);
+                    Log.i("Api response: ",""+response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RespomseBabyData> call, Throwable t) {
+
+            }
+        });
+    }
+
 }
