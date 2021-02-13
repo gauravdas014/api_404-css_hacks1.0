@@ -1,13 +1,13 @@
 package com.example.nirog.data.model;
 
-public class SignUp {
+public class Signup {
     String name;
     String phone;
     String email;
     String address;
     String password;
 
-    public SignUp(String name, String phone, String email, String address, String password) {
+    public Signup(String name, String phone, String email, String address, String password) {
         this.name = name;
         this.phone = phone;
         this.email = email;

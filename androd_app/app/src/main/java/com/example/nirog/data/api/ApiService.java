@@ -9,7 +9,7 @@ import com.example.nirog.data.model.ResponseHospital;
 import com.example.nirog.data.model.ResponseLogin;
 import com.example.nirog.data.model.ResponseVaccine;
 import com.example.nirog.data.model.ResponseVaccineDetails;
-import com.example.nirog.data.model.SignUp;
+import com.example.nirog.data.model.Signup;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -37,7 +37,7 @@ public interface ApiService {
     Call<ResponseVaccineDetails> GetAllVaccines();
 
     @POST("api/user/signup")
-    Call<ResponseLogin> signUp_User(@Body SignUp signup);
+    Call<ResponseLogin> signUp_User(@Body Signup signup);
 
     @POST("api/user/login")
     Call<ResponseLogin> Login_user(@Body Login login);
