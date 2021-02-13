@@ -2,59 +2,74 @@ package com.example.nirog.Authentication;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.nirog.R;
 import com.example.nirog.databinding.FragmentForgotPasswordBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class ForgotPasswordFragment extends Fragment {
 
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
     //binding
     private FragmentForgotPasswordBinding binding;
+    private FirebaseAuth mAuth;
 
 
-    private String mParam1;
-    private String mParam2;
-
-    public ForgotPasswordFragment() {
-        // Required empty public constructor
-    }
-
-
-    public static ForgotPasswordFragment newInstance(String param1, String param2) {
-        ForgotPasswordFragment fragment = new ForgotPasswordFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentForgotPasswordBinding.inflate(inflater, container, false);
+
+        mAuth = FirebaseAuth.getInstance();
+        binding.forgotPasswordProgressBar.setVisibility(View.INVISIBLE);
+
+        binding.forgotPasswordConfirmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(binding.email.getText().toString().length()>0){
+                    binding.forgotPasswordProgressBar.setVisibility(View.VISIBLE);
+                    SendEmail();
+                }
+                else{
+                    Toast.makeText(getActivity(),"Please enter Email Id",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         return binding.getRoot();
     }
+
+    private void SendEmail() {
+        mAuth.sendPasswordResetEmail(binding.email.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    binding.forgotPasswordProgressBar.setVisibility(View.INVISIBLE);
+                    Toast.makeText(getActivity(),"Password Reset link sent to your registered email ID",Toast.LENGTH_LONG).show();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                binding.forgotPasswordProgressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(getActivity(),""+e.toString(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     @Override
     public void onDestroyView() {
