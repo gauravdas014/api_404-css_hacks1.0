@@ -9,12 +9,16 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.nirog.data.api.ApiHelper;
+import com.example.nirog.data.model.Login;
 import com.example.nirog.data.model.ResponseDocDetails;
 import com.example.nirog.data.model.ResponseDoctor;
+import com.example.nirog.data.model.ResponseGet_user;
 import com.example.nirog.data.model.ResponseHosDetails;
 import com.example.nirog.data.model.ResponseHospital;
+import com.example.nirog.data.model.ResponseLogin;
 import com.example.nirog.data.model.ResponseVaccine;
 import com.example.nirog.data.model.ResponseVaccineDetails;
+import com.example.nirog.data.model.Signup;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,7 +34,9 @@ public class HospitalViewModel extends AndroidViewModel {
     private MutableLiveData<ResponseDoctor> doctorResponse;
     private MutableLiveData<ResponseVaccine> vaccineResponse;
     private MutableLiveData<ResponseVaccineDetails> vaccineDetailsRes;
-
+    private MutableLiveData<ResponseLogin> signUpResponse;
+    private MutableLiveData<ResponseLogin> LoginResponse;
+    private MutableLiveData<ResponseGet_user> get_userResponse;
 
 
 
@@ -43,6 +49,9 @@ public class HospitalViewModel extends AndroidViewModel {
         docDetailsRes = new MutableLiveData<ResponseDocDetails>();
         vaccineResponse = new MutableLiveData<ResponseVaccine>();
         vaccineDetailsRes = new MutableLiveData<ResponseVaccineDetails>();
+        signUpResponse = new MutableLiveData<ResponseLogin>();
+        LoginResponse = new MutableLiveData<ResponseLogin>();
+        get_userResponse = new MutableLiveData<ResponseGet_user>();
     }
 
     public MutableLiveData<ResponseHosDetails> getAllHosDetailsRes()
@@ -70,6 +79,21 @@ public class HospitalViewModel extends AndroidViewModel {
     public MutableLiveData<ResponseVaccineDetails> getALLVaccinesRes()
     {
         return vaccineDetailsRes;
+    }
+
+    public MutableLiveData<ResponseGet_user> Get_userResponse()
+    {
+        return  get_userResponse;
+    }
+
+    public MutableLiveData<ResponseLogin> getSignUpResponse()
+    {
+        return signUpResponse;
+    }
+
+    public MutableLiveData<ResponseLogin> getLoginResponse()
+    {
+        return LoginResponse;
     }
 
 
@@ -191,6 +215,65 @@ public class HospitalViewModel extends AndroidViewModel {
             @Override
             public void onFailure(Call<ResponseVaccineDetails> call, Throwable t) {
                 vaccineDetailsRes.postValue(null);
+            }
+        });
+    }
+
+    public void SignUp(Signup signup)
+    {
+        apiHelper.signUp_User(signup).enqueue(new Callback<ResponseLogin>() {
+            @Override
+            public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
+                if(response.code()<300) {
+                    signUpResponse.postValue(response.body());
+                }else if(response.code()>400) {
+                    signUpResponse.postValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseLogin> call, Throwable t) {
+                signUpResponse.postValue(null);
+
+            }
+        });
+    }
+
+    public void Login(Login login)
+    {
+        apiHelper.Login_user(login).enqueue(new Callback<ResponseLogin>() {
+            @Override
+            public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
+                if(response.code()<300) {
+                    LoginResponse.postValue(response.body());
+                }else if(response.code()>400) {
+                    LoginResponse.postValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseLogin> call, Throwable t) {
+                LoginResponse.postValue(null);
+            }
+        });
+    }
+
+    public void Get_User(String userId)
+    {
+        apiHelper.GET_USER(userId).enqueue(new Callback<ResponseGet_user>() {
+            @Override
+            public void onResponse(Call<ResponseGet_user> call, Response<ResponseGet_user> response) {
+                if(response.code()<300) {
+                    get_userResponse.postValue(response.body());
+                }else if(response.code()>400) {
+                    get_userResponse.postValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseGet_user> call, Throwable t) {
+                get_userResponse.postValue(null);
+
             }
         });
     }
