@@ -18,4 +18,13 @@
         <item name="fontFamily">@font/poppins_bold</item>
         <item name="android:textSize">24dp</item>
     </style>
+
+    <style name="ExpandedAppBarTitleTextAppearance" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="android:textSize">32dp</item>
+    </style>
+
+    <style name="circular">
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>
