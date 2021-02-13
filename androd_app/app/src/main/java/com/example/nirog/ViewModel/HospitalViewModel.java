@@ -11,6 +11,8 @@ import com.example.nirog.data.model.ResponseDocDetails;
 import com.example.nirog.data.model.ResponseDoctor;
 import com.example.nirog.data.model.ResponseHosDetails;
 import com.example.nirog.data.model.ResponseHospital;
+import com.example.nirog.data.model.ResponseVaccine;
+import com.example.nirog.data.model.ResponseVaccineDetails;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,6 +26,8 @@ public class HospitalViewModel extends AndroidViewModel {
     private MutableLiveData<ResponseHospital>  HospitalResponse;
     private MutableLiveData<ResponseDocDetails> docDetailsRes;
     private MutableLiveData<ResponseDoctor> doctorResponse;
+    private MutableLiveData<ResponseVaccine> vaccineResponse;
+    private MutableLiveData<ResponseVaccineDetails> vaccineDetailsRes;
 
 
 
@@ -35,6 +39,8 @@ public class HospitalViewModel extends AndroidViewModel {
         HospitalResponse = new MutableLiveData<ResponseHospital>();
         doctorResponse = new MutableLiveData<ResponseDoctor>();
         docDetailsRes = new MutableLiveData<ResponseDocDetails>();
+        vaccineResponse = new MutableLiveData<ResponseVaccine>();
+        vaccineDetailsRes = new MutableLiveData<ResponseVaccineDetails>();
     }
 
     public MutableLiveData<ResponseHosDetails> getAllHosDetailsRes()
@@ -54,6 +60,14 @@ public class HospitalViewModel extends AndroidViewModel {
     public MutableLiveData<ResponseDoctor> getDoctorResponse()
     {
         return doctorResponse;
+    }
+
+    public MutableLiveData<ResponseVaccine> getVaccineResponse(){
+        return vaccineResponse;
+    }
+    public MutableLiveData<ResponseVaccineDetails> getALLVaccinesRes()
+    {
+        return vaccineDetailsRes;
     }
 
 
@@ -136,4 +150,44 @@ public class HospitalViewModel extends AndroidViewModel {
             }
         });
     }
+
+    public void getVaccine(String vaccineId)
+    {
+        apiHelper.GetVaccine(vaccineId).enqueue(new Callback<ResponseVaccine>() {
+            @Override
+            public void onResponse(Call<ResponseVaccine> call, Response<ResponseVaccine> response) {
+                if(response.code()<300) {
+                    vaccineResponse.postValue(response.body());
+                }else if(response.code()>400) {
+                    vaccineResponse.postValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseVaccine> call, Throwable t) {
+                vaccineResponse.postValue(null);
+
+            }
+        });
+    }
+
+    public void getAllVaccines()
+    {
+        apiHelper.GetAllVaccines().enqueue(new Callback<ResponseVaccineDetails>() {
+            @Override
+            public void onResponse(Call<ResponseVaccineDetails> call, Response<ResponseVaccineDetails> response) {
+                if(response.code()<300) {
+                    vaccineDetailsRes.postValue(response.body());
+                }else if(response.code()>400) {
+                    vaccineDetailsRes.postValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseVaccineDetails> call, Throwable t) {
+                vaccineDetailsRes.postValue(null);
+            }
+        });
+    }
+
 }

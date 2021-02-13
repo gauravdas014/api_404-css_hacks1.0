@@ -7,6 +7,8 @@ import com.example.nirog.data.model.ResponseDocDetails;
 import com.example.nirog.data.model.ResponseDoctor;
 import com.example.nirog.data.model.ResponseHosDetails;
 import com.example.nirog.data.model.ResponseHospital;
+import com.example.nirog.data.model.ResponseVaccine;
+import com.example.nirog.data.model.ResponseVaccineDetails;
 
 import retrofit2.Call;
 
@@ -47,5 +49,15 @@ public class ApiHelper implements ApiService{
     @Override
     public Call<ResponseDocDetails> GetAllDoctors(String hospitalId) {
         return GetAllDoctors(hospitalId);
+    }
+
+    @Override
+    public Call<ResponseVaccine> GetVaccine(String vaccineId) {
+        return GetVaccine(vaccineId);
+    }
+
+    @Override
+    public Call<ResponseVaccineDetails> GetAllVaccines() {
+        return GetAllVaccines();
     }
 }
