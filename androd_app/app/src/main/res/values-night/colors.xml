@@ -4,4 +4,6 @@
     <color name="green_primary">#26D156</color>
     <color name="green_secondary">#4FF87D</color>
     <color name="green_light">#4AF6AE</color>
+    <color name="pink_color">#FF4081</color>
+    <color name="vaccine_bg_tintt">#FFF8FA</color>
 </resources>

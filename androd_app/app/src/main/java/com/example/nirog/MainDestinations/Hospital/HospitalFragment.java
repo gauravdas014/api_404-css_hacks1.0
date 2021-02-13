@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.nirog.R;
@@ -23,7 +24,10 @@ public class HospitalFragment extends Fragment {
 
     //setting view binding
     private FragmentHospitalBinding binding;
-    HospitalViewModel hospitalViewModel;
+    //setting the view model
+    private HospitalViewModel viewModel;
+    //calling adapter to set in recycler view
+    private HospitalListAdapter adapter;
 
 
     private String mParam1;
@@ -51,7 +55,8 @@ public class HospitalFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        hospitalViewModel = new ViewModelProvider(this).get(HospitalViewModel.class);
+
+
     }
 
     @Override
@@ -59,9 +64,25 @@ public class HospitalFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentHospitalBinding.inflate(inflater, container, false);
+
+        // initializing the view model
+        viewModel = new ViewModelProvider(this).get(HospitalViewModel.class);
+
+        //setting the adapter with data using view model
+        viewModel.getAllHospitals();
+
+        //getting the response
+        viewModel.getAllHosDetailsRes().observe(this, data->{
+            if(data != null){
+                adapter = new HospitalListAdapter(data.getHospitalDetailsList(), getContext());
+                binding.hospitalListRecyclerView.setAdapter(adapter);
+            }else{
+                Toast.makeText(getContext(), "There is some error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         return binding.getRoot();
-
-
 
     }
 
