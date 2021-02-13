@@ -36,11 +36,12 @@ public class SplashFragment extends Fragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                String id = sharedPreferences.getString("User_id",null);
-                if(id == null)
-                    setFragment(new LoginFragment());
-                else
-                    setFragment(new BottomNavFragment());
+//                String id = sharedPreferences.getString("User_id",null);
+//                if(id == null)
+//                    setFragment(new LoginFragment());
+//                else
+//                    setFragment(new BottomNavFragment());
+                setFragment(new BottomNavFragment());
             }
         },600);
 

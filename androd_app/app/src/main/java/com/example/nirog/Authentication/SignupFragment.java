@@ -22,7 +22,6 @@ import com.example.nirog.MainDestinations.BottomNavFragment;
 import com.example.nirog.R;
 import com.example.nirog.ViewModel.HospitalViewModel;
 import com.example.nirog.data.model.NEWSIGNUP;
-import com.example.nirog.data.model.Signup;
 import com.example.nirog.databinding.FragmentSignupBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
