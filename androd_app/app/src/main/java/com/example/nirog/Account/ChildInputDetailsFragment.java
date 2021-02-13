@@ -39,22 +39,16 @@ public class ChildInputDetailsFragment extends Fragment implements DatePickerDia
         // Inflate the layout for this fragment
         binding = FragmentChildInputDetailsBinding.inflate(inflater, container, false);
 
-        binding.ageInYrsEdittext.setOnClickListener(new View.OnClickListener() {
+
+
+        // date picker for the child on clicking the edit text
+        binding.selectDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 retrievedate();
             }
         });
 
-        // date picker for the child on clicking the edit text
-        binding.ageInYrsTextiplayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                retrievedate();
-               // DialogFragment datePicker = new DatePickerFragment();
-               // datePicker.show(getFragmentManager(), "Date Picker");
-            }
-        });
 
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -62,7 +56,6 @@ public class ChildInputDetailsFragment extends Fragment implements DatePickerDia
                 Year = year;
                 Month = month;
                 Day = dayOfMonth;
-                Toast.makeText(getActivity(),""+Day+"/"+Month+"/"+Year,Toast.LENGTH_SHORT).show();
                 binding.ageInYrsEdittext.setText(Day+"/"+Month+"/"+Year);
             }
         };
@@ -76,9 +69,8 @@ public class ChildInputDetailsFragment extends Fragment implements DatePickerDia
         int month = calendar.get(Calendar.MONTH);
         int date = calendar.get(Calendar.DATE);
         DatePickerDialog dialog = new DatePickerDialog(
-                getActivity(), android.R.style.Theme_Holo_Dialog_MinWidth,
+                getActivity(),
                 mDateSetListener,year,month,date);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); //for transparent background
         dialog.show();
     }
 
