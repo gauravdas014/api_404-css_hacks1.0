@@ -1,6 +1,7 @@
 const Vaccine = require('../models/vaccineModel');
 const puppeteer = require('puppeteer');
 
+// Function to add vaccine
 exports.addVaccine = async (req, res) => {
   try {
     const newVaccine = await Vaccine.create(req.body);
@@ -16,9 +17,50 @@ exports.addVaccine = async (req, res) => {
   }
 };
 
+// Function to get list of vaccines
 exports.getAllVaccines = async (req, res) => {
   try {
-    const vaccines = await Vaccine.find();
+    // initialized empty array for storing result of scrapper
+    let final = [];
+    finalFiltered = [];
+    // main function which scraps
+    async function scrap() {
+      // launch puppeteer
+      const browser = await puppeteer.launch();
+      const page = await browser.newPage();
+      await page.goto('http://www.nrhmhp.gov.in/content/immunisation');
+      const data = await page.evaluate(() => {
+        // pick all the contents with query selector "tr"
+        const tds = Array.from(document.querySelectorAll('tr'));
+        return tds.map((td) => td.innerText);
+      });
+      // initialize an empty model for storing the scrapped data
+      data.forEach((entry) => {
+        let finalObj = {
+          name: '',
+          whenToGive: '',
+          dose: '',
+          route: '',
+          site: '',
+        };
+        // split the array of data to get indiidual column
+        let temp = entry.split('\t');
+        finalObj.name = temp[0];
+        finalObj.whenToGive = temp[1];
+        finalObj.dose = temp[2];
+        finalObj.route = temp[3];
+        finalObj.site = temp[4];
+        final.push(finalObj);
+      });
+      final.forEach((entry) => {
+        if (entry.name && entry.whenToGive && entry.site !== 'Site') {
+          finalFiltered.push(entry);
+        }
+      });
+      await browser.close();
+      return finalFiltered;
+    }
+    let vaccines = await scrap();
     res.status(200).json({
       status: 'success',
       vaccines,
