@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const viewRouter = require('./routes/viewRoutes');
 const authRouter = require('./routes/authRoutes');
+const hospitalRouter = require('./routes/hospitalRoutes');
 
 const app = express();
 
@@ -14,5 +15,6 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use('/', viewRouter);
 app.use('/auth', authRouter);
+app.use('/api/hospital', hospitalRouter);
 
 module.exports = app;
