@@ -13,7 +13,7 @@ import com.example.nirog.data.model.ResponseHospital;
 import com.example.nirog.data.model.ResponseLogin;
 import com.example.nirog.data.model.ResponseVaccine;
 import com.example.nirog.data.model.ResponseVaccineDetails;
-import com.example.nirog.data.model.SignUp;
+import com.example.nirog.data.model.Signup;
 
 import retrofit2.Call;
 
@@ -67,8 +67,8 @@ public class ApiHelper implements ApiService{
     }
 
     @Override
-    public Call<ResponseLogin> signUp_User(SignUp signUp) {
-        return signUp_User(signUp);
+    public Call<ResponseLogin> signUp_User(Signup signup) {
+        return signUp_User(signup);
     }
 
     @Override
