@@ -1,19 +1,24 @@
 package com.example.nirog.MainDestinations.Hospital;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.nirog.R;
 import com.example.nirog.ViewModel.HospitalViewModel;
 import com.example.nirog.databinding.FragmentHospitalBinding;
+import com.google.android.material.transition.MaterialElevationScale;
 
 
 public class HospitalFragment extends Fragment implements HospitalListAdapter.OnCardClick {
@@ -68,6 +73,7 @@ public class HospitalFragment extends Fragment implements HospitalListAdapter.On
         // Inflate the layout for this fragment
         binding = FragmentHospitalBinding.inflate(inflater, container, false);
 
+
         //setting the adapter with data using view model
         viewModel.getAllHospitals();
 
@@ -93,10 +99,14 @@ public class HospitalFragment extends Fragment implements HospitalListAdapter.On
     }
 
     @Override
-    public void onClick(int position, String hospitalName, String contact, String address, String id) {
+    public void onClick(int position, String hospitalName, String contact, String address, String id, ImageView imageView) {
+        Transition transition = TransitionInflater.from(getContext()).inflateTransition(R.transition.image_shared_transition);
         HospitalDetailsFragment hospitalDetailsFragment = HospitalDetailsFragment.newInstance(hospitalName, address, contact, id, position);
+        hospitalDetailsFragment.setEnterTransition(new MaterialElevationScale(true));
+        hospitalDetailsFragment.setReenterTransition(new MaterialElevationScale(true));
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, hospitalDetailsFragment);
+        transaction.addSharedElement(imageView, "shared_element_transform");
         transaction.addToBackStack(null);
         transaction.commit();
     }

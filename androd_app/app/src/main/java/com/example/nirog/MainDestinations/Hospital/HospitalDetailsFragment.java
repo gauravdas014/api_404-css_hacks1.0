@@ -6,12 +6,15 @@ import android.os.Bundle;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
+import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.nirog.R;
 import com.example.nirog.databinding.FragmentHospitalDetailsBinding;
+import com.google.android.material.transition.MaterialContainerTransform;
+import com.google.android.material.transition.MaterialElevationScale;
 import com.google.gson.TypeAdapterFactory;
 
 
@@ -70,6 +73,8 @@ public class HospitalDetailsFragment extends Fragment{
         // Inflate the layout for this fragment
         binding = FragmentHospitalDetailsBinding.inflate(inflater, container, false);
 
+        setEnterTransition(new MaterialElevationScale(true));
+        setReenterTransition(new MaterialContainerTransform());
         //custom font for collapsing toolbar layout
         Typeface typeface = ResourcesCompat.getFont(getContext(), R.font.poppins_bold);
         binding.collapsingToolbar.setExpandedTitleTypeface(typeface);

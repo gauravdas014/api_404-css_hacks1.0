@@ -16,6 +16,7 @@ import com.example.nirog.MainDestinations.Vaccine.VaccineFragment;
 import com.example.nirog.R;
 import com.example.nirog.databinding.FragmentBottomNavBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.transition.MaterialElevationScale;
 
 
 public class BottomNavFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener{
@@ -94,6 +95,8 @@ public class BottomNavFragment extends Fragment implements BottomNavigationView.
 
 
     private void setFragment(Fragment fragment) {
+        fragment.setEnterTransition(new MaterialElevationScale(true));
+        fragment.setReturnTransition(new MaterialElevationScale(false));
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.destination_container,fragment);
         fragmentTransaction.commit();

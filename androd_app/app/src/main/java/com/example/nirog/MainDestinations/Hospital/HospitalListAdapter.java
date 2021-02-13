@@ -59,7 +59,8 @@ public class HospitalListAdapter extends RecyclerView.Adapter<HospitalListAdapte
                         currentItem.getName(),
                         currentItem.getPhone(),
                         currentItem.getAddress(),
-                        currentItem.get_id());
+                        currentItem.get_id(),
+                        holder.hospitalImage);
             }
         });
 
@@ -88,7 +89,7 @@ public class HospitalListAdapter extends RecyclerView.Adapter<HospitalListAdapte
     }
 
     public interface OnCardClick{
-        public void onClick(int position, String hospitalName, String contact, String address, String id);
+        public void onClick(int position, String hospitalName, String contact, String address, String id, ImageView imageView);
     }
 
 

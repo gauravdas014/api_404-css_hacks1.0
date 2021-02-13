@@ -21,6 +21,8 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <ImageView
+                android:id="@+id/hospital_image_detail"
+                android:transitionName="shared_element_transform"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
