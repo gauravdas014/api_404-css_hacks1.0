@@ -1,8 +1,16 @@
 package com.example.nirog.data.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class ResponseHospital {
 
+    @SerializedName("status")
+    @Expose
     private String status;
+
+    @SerializedName("hospital")
+    @Expose
     private HospitalDetails hospitalDetails;
 
     public ResponseHospital(String status, HospitalDetails hospitalDetails) {

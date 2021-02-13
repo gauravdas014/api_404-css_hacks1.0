@@ -1,17 +1,53 @@
 package com.example.nirog.data.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class HospitalDetails {
 
+
+    @SerializedName("isApproved")
+    @Expose
     private Boolean isApproved;
+
+    @SerializedName("_id")
+    @Expose
     private String _id;
+
+    @SerializedName("name")
+    @Expose
     private String name;
+
+    @SerializedName("phone")
+    @Expose
     private String phone;
+
+    @SerializedName("address")
+    @Expose
     private String address;
+
+    @SerializedName("password")
+    @Expose
     private String password;
+
+    @SerializedName("createdAt")
+    @Expose
     private String createdAt;
+
+    @SerializedName("updatedAt")
+    @Expose
     private String updatedAt;
+
+    @SerializedName("__v")
+    @Expose
     private Integer _v;
+
+    @SerializedName("description")
+    @Expose
     private String  description;
+
+    @SerializedName("image")
+    @Expose
     private String image;
 
     public HospitalDetails(Boolean isApproved, String _id, String name, String phone, String address, String password, String createdAt, String updatedAt, Integer _v, String description, String image) {

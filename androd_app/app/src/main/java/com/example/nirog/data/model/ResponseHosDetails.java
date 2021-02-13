@@ -1,10 +1,18 @@
 package com.example.nirog.data.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class ResponseHosDetails {
 
+    @SerializedName("status")
+    @Expose
     private String status;
+
+    @SerializedName("hospitals")
+    @Expose
     private List<HospitalDetails> hospitalDetailsList;
 
     public ResponseHosDetails(String status, List<HospitalDetails> hospitalDetailsList) {
