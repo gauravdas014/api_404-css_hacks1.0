@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.transition.TransitionInflater;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.nirog.R;
@@ -34,8 +36,6 @@ public class HospitalDetailsFragment extends Fragment{
     private FragmentHospitalDetailsBinding binding;
     //initializing view model for getting hospital data
     private HospitalViewModel viewModel;
-    //string for storing url
-    private String imageUrl;
 
 
     private String mHospitalName;
@@ -101,19 +101,20 @@ public class HospitalDetailsFragment extends Fragment{
         //getting the response
         viewModel.getHospitalResponse().observe(this, data->{
             if(data != null){
-                imageUrl = data.getHospitalDetails().getImage();
+                Log.d("Hospital", data.getHospitalDetails().getImage() + " : Image Url");
+                //setting image from the url
+                Glide.with(getContext())
+                        .load(data.getHospitalDetails().getImage())
+                        .placeholder(R.drawable.placeholder_drawable)
+                        .centerCrop()
+                        .into(binding.hospitalImageDetail);
                 binding.description.setText(data.getHospitalDetails().getDescription());
             }else{
-
+                Toast.makeText(getContext(), "No data found", Toast.LENGTH_SHORT).show();
             }
         });
 
-        //setting image from the url
-        Glide.with(getContext())
-                .load(imageUrl)
-                .placeholder(R.drawable.placeholder_drawable)
-                .centerCrop()
-                .into(binding.hospitalImageDetail);
+
 
 
         return binding.getRoot();
