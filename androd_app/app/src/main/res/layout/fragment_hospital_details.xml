@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:title="Hospital Name"
+            app:contentScrim="@color/green_secondary"
             app:expandedTitleTextAppearance="@style/ExpandedAppBarTitleTextAppearance"
             app:collapsedTitleTextAppearance="@style/AppBarTitleTextAppearance"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">

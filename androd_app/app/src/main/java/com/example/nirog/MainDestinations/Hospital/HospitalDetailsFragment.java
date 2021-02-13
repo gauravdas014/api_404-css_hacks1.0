@@ -62,6 +62,7 @@ public class HospitalDetailsFragment extends Fragment{
             mHospitalName = getArguments().getString(HOSPITAL_NAME);
             mAddress = getArguments().getString(ADDRESS);
             mId = getArguments().getString(ID);
+            mContact = getArguments().getString(CONTACT);
             mPosition = getArguments().getInt(POSITION);
 
         }
@@ -79,6 +80,10 @@ public class HospitalDetailsFragment extends Fragment{
         Typeface typeface = ResourcesCompat.getFont(getContext(), R.font.poppins_bold);
         binding.collapsingToolbar.setExpandedTitleTypeface(typeface);
         binding.collapsingToolbar.setCollapsedTitleTypeface(typeface);
+
+        //setting the views
+        binding.collapsingToolbar.setTitle(mHospitalName);
+        binding.addtionalInfo.setText("Phone: " + mContact + "\n" + "Address: " + mAddress);
 
 
         return binding.getRoot();
