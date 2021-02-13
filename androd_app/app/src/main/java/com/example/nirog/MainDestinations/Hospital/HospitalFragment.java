@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.example.nirog.R;
 import com.example.nirog.ViewModel.HospitalViewModel;
 import com.example.nirog.databinding.FragmentHospitalBinding;
 
@@ -56,6 +54,8 @@ public class HospitalFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        // initializing the view model
+        viewModel = new ViewModelProvider(this).get(HospitalViewModel.class);
 
     }
 
@@ -64,9 +64,6 @@ public class HospitalFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentHospitalBinding.inflate(inflater, container, false);
-
-        // initializing the view model
-        viewModel = new ViewModelProvider(this).get(HospitalViewModel.class);
 
         //setting the adapter with data using view model
         viewModel.getAllHospitals();
