@@ -6,7 +6,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.example.nirog.data.api.ApiHelper;
 import com.example.nirog.data.model.Login;
@@ -18,7 +17,7 @@ import com.example.nirog.data.model.ResponseHospital;
 import com.example.nirog.data.model.ResponseLogin;
 import com.example.nirog.data.model.ResponseVaccine;
 import com.example.nirog.data.model.ResponseVaccineDetails;
-import com.example.nirog.data.model.Signup;
+import com.example.nirog.data.model.SignUp;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -219,7 +218,7 @@ public class HospitalViewModel extends AndroidViewModel {
         });
     }
 
-    public void SignUp(Signup signup)
+    public void SignUp(SignUp signup)
     {
         apiHelper.signUp_User(signup).enqueue(new Callback<ResponseLogin>() {
             @Override

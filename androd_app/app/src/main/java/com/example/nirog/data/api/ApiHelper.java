@@ -3,7 +3,6 @@ package com.example.nirog.data.api;
 import android.content.Context;
 
 import com.example.nirog.Retrofit.RetrofitProvider;
-import com.example.nirog.data.model.Get_User;
 import com.example.nirog.data.model.Login;
 import com.example.nirog.data.model.ResponseDocDetails;
 import com.example.nirog.data.model.ResponseDoctor;
@@ -13,7 +12,7 @@ import com.example.nirog.data.model.ResponseHospital;
 import com.example.nirog.data.model.ResponseLogin;
 import com.example.nirog.data.model.ResponseVaccine;
 import com.example.nirog.data.model.ResponseVaccineDetails;
-import com.example.nirog.data.model.Signup;
+import com.example.nirog.data.model.SignUp;
 
 import retrofit2.Call;
 
@@ -67,7 +66,7 @@ public class ApiHelper implements ApiService{
     }
 
     @Override
-    public Call<ResponseLogin> signUp_User(Signup signup) {
+    public Call<ResponseLogin> signUp_User(SignUp signup) {
         return signUp_User(signup);
     }
 
