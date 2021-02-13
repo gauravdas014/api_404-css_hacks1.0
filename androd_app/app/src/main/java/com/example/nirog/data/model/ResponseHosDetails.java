@@ -16,9 +16,7 @@ public class ResponseHosDetails {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+
 
     public List<HospitalDetails> getHospitalDetailsList() {
         return hospitalDetailsList;

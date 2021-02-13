@@ -43,21 +43,21 @@ public class ApiHelper implements ApiService{
 
     @Override
     public Call<ResponseDoctor> GetDoctor(String doctorId) {
-        return GetDoctor(doctorId);
+        return api.GetDoctor(doctorId);
     }
 
     @Override
     public Call<ResponseDocDetails> GetAllDoctors(String hospitalId) {
-        return GetAllDoctors(hospitalId);
+        return api.GetAllDoctors(hospitalId);
     }
 
     @Override
     public Call<ResponseVaccine> GetVaccine(String vaccineId) {
-        return GetVaccine(vaccineId);
+        return api.GetVaccine(vaccineId);
     }
 
     @Override
     public Call<ResponseVaccineDetails> GetAllVaccines() {
-        return GetAllVaccines();
+        return api.GetAllVaccines();
     }
 }

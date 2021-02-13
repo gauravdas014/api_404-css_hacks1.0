@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.nirog.R;
 import com.example.nirog.data.model.HospitalDetails;
 import com.google.android.material.card.MaterialCardView;
@@ -38,6 +39,16 @@ public class HospitalListAdapter extends RecyclerView.Adapter<HospitalListAdapte
         holder.hospitalName.setText(currentItem.getName());
         holder.hospitalInfo.setText(currentItem.getPhone() + "\n" + currentItem.getAddress());
 
+        //code to load image in recycler view
+        String url = currentItem.getImage();
+
+        //using glide library to load images from url
+        Glide.with(context)
+                .load(url)
+                .centerCrop()
+                .placeholder(R.drawable.placeholder_drawable)
+                .into(holder.hospitalImage);
+
     }
 
     @Override
@@ -61,5 +72,6 @@ public class HospitalListAdapter extends RecyclerView.Adapter<HospitalListAdapte
             hospitalInfo = itemView.findViewById(R.id.hospital_additional_info);
         }
     }
+
 
 }
