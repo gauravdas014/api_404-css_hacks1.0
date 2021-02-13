@@ -1,16 +1,24 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 const bcrypt = require('bcryptjs');
 
 const hospitalSchema = new mongoose.Schema(
   {
     name: {
       type: String,
+      required: [true, 'Please provide the name of the hospital'],
+      trim: true,
     },
     phone: {
       type: String,
+      required: [true, 'Please provide phone number'],
     },
     email: {
       type: String,
+      required: [true, 'Please provide your email'],
+      unique: true,
+      lowercase: true,
+      validate: [validator.isEmail, 'Please provide a valid email'],
     },
     isApproved: {
       type: Boolean,
@@ -18,6 +26,7 @@ const hospitalSchema = new mongoose.Schema(
     },
     address: {
       type: String,
+      required: [true, 'Please provide hospital address'],
     },
     password: {
       type: String,
@@ -27,6 +36,7 @@ const hospitalSchema = new mongoose.Schema(
     },
     image: {
       type: String,
+      required: [true, 'Please provide hospital image'],
     },
     roomAvailableCount: {
       type: String,

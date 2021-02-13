@@ -29,6 +29,13 @@ const createSendToken = async (user, statusCode, req, res) => {
 
 exports.signup = async (req, res) => {
   try {
+    const user = await User.findOne({ email: req.body.email });
+    if (user) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'Email already registered!',
+      });
+    }
     const newUser = await User.create({
       name: req.body.name,
       phone: req.body.phone,
@@ -111,10 +118,28 @@ exports.registerBaby = async (req, res) => {
       parent: req.params.userId,
       motherName: req.body.motherName,
       fatherName: req.body.fatherName,
+      dateOfBirth: req.body.dateOfBirth,
+      monthOfBirth: req.body.monthOfBirth,
+      yearOfBirth: req.body.yearOfBirth,
     });
     res.status(201).json({
       status: 'success',
       baby: newBaby,
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'fail',
+      message: err,
+    });
+  }
+};
+
+exports.getBabyDetails = async (req, res) => {
+  try {
+    const baby = await Baby.findOne({ parent: req.params.parentId });
+    res.status(200).json({
+      status: 'success',
+      baby,
     });
   } catch (err) {
     res.status(400).json({
