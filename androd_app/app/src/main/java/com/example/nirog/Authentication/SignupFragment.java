@@ -56,13 +56,7 @@ public class SignupFragment extends Fragment {
         String Email = binding.email.getText().toString();
         String Password = binding.password.getText().toString();
         String ConPassword = binding.confirmPassword.getText().toString();
-        //String User_Name = binding.username.getText().toString();
-        /*if(User_Name.length()==0){
-            Toast.makeText(getActivity(),"please enter your name",Toast.LENGTH_SHORT).show();
-            binding.usernameTxtiplayout.setError("Required Field");
-            binding.progressBarSignUp.setVisibility(View.INVISIBLE);
-        }*/
-         if(Email.length()==0){
+        if(Email.length()==0){
             Toast.makeText(getActivity(),"please enter email filed",Toast.LENGTH_SHORT).show();
             binding.emailTxtiplayout.setError("Required Field");
             binding.progressBarSignUp.setVisibility(View.INVISIBLE);
@@ -94,24 +88,7 @@ public class SignupFragment extends Fragment {
     }
 
     private void Signup() {
-        mAuth.createUserWithEmailAndPassword(binding.email.getText().toString(),binding.password.getText().toString())
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            binding.progressBarSignUp.setVisibility(View.INVISIBLE);
-                            Toast.makeText(getActivity(),"Signup Successful by " + binding.email.getText().toString().trim(),Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                binding.progressBarSignUp.setVisibility(View.INVISIBLE);
-                Toast.makeText(getActivity(),""+e.toString(),Toast.LENGTH_SHORT).show();
-            }
-        });
+            //....sendapi.......
     }
 
     @Override
@@ -128,7 +105,6 @@ public class SignupFragment extends Fragment {
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            //String usernameInput = binding.username.getText().toString().trim();
             String emailInput = binding.email.getText().toString().trim();
             String passwordInput = binding.password.getText().toString().trim();
             String confirmPasswordInput = binding.confirmPassword.getText().toString().trim();

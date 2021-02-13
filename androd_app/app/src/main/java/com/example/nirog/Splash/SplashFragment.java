@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.nirog.Account.ChildInputDetailsFragment;
 import com.example.nirog.Authentication.LoginFragment;
 import com.example.nirog.R;
 import com.example.nirog.databinding.FragmentSplashBinding;

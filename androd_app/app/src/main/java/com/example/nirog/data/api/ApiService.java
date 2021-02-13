@@ -4,6 +4,8 @@ import com.example.nirog.data.model.ResponseDocDetails;
 import com.example.nirog.data.model.ResponseDoctor;
 import com.example.nirog.data.model.ResponseHosDetails;
 import com.example.nirog.data.model.ResponseHospital;
+import com.example.nirog.data.model.ResponseVaccine;
+import com.example.nirog.data.model.ResponseVaccineDetails;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -21,4 +23,10 @@ public interface ApiService {
 
     @GET("api/doctor/hospitalwise/{hospitalId}")
     Call<ResponseDocDetails> GetAllDoctors(@Path("hospitalId") String hospitalId);
+
+    @GET("api/vaccine/{vaccineId}")
+    Call<ResponseVaccine> GetVaccine(@Path("vaccineId")String vaccineId);
+
+    @GET("api/vaccine")
+    Call<ResponseVaccineDetails> GetAllVaccines();
 }

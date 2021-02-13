@@ -13,4 +13,6 @@
     <color name="green_primary">#388E3C</color>
     <color name="green_secondary">#43A047</color>
     <color name="green_light">#31DA93</color>
+    <color name="pink_color">#FF4081</color>
+    <color name="vaccine_bg_tintt">#FFF8FA</color>
 </resources>

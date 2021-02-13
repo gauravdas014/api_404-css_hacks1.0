@@ -3,13 +3,14 @@ package com.example.nirog.MainDestinations.Hospital;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.example.nirog.R;
+import com.example.nirog.ViewModel.HospitalViewModel;
 import com.example.nirog.databinding.FragmentHospitalBinding;
 
 
@@ -21,6 +22,10 @@ public class HospitalFragment extends Fragment {
 
     //setting view binding
     private FragmentHospitalBinding binding;
+    //setting the view model
+    private HospitalViewModel viewModel;
+    //calling adapter to set in recycler view
+    private HospitalListAdapter adapter;
 
 
     private String mParam1;
@@ -48,6 +53,11 @@ public class HospitalFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        // initializing the view model
+        viewModel = new ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.
+                getInstance(getActivity().getApplication())).get(HospitalViewModel.class);
+
     }
 
     @Override
@@ -55,6 +65,21 @@ public class HospitalFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentHospitalBinding.inflate(inflater, container, false);
+
+        //setting the adapter with data using view model
+        viewModel.getAllHospitals();
+
+        //getting the response
+        viewModel.getAllHosDetailsRes().observe(this, data->{
+            if(data != null){
+                adapter = new HospitalListAdapter(data.getHospitalDetailsList(), getContext());
+                binding.hospitalListRecyclerView.setAdapter(adapter);
+            }else{
+                Toast.makeText(getContext(), "There is some error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         return binding.getRoot();
 
     }
