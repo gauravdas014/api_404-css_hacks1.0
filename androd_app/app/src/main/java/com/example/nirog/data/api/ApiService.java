@@ -48,7 +48,7 @@ public interface ApiService {
     @GET("api/user/{userId}")
     Call<ResponseGet_user> GET_USER(@Path("userId") String id);
 
-    @GET("api/user/baby/register/{userId}")
-    Call<RespomseBabyData> Register_Baby(@Path("userId") Babydata bd);
+    @POST("api/user/baby/register/{userId}")
+    Call<RespomseBabyData> Register_Baby(@Path("userId") String id,@Path("userId") Babydata bd);
 
 }

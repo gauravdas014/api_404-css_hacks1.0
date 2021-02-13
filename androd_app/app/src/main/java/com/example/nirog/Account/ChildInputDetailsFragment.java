@@ -82,7 +82,19 @@ public class ChildInputDetailsFragment extends Fragment implements DatePickerDia
         String name = binding.babyNameEdittext.getText().toString();
         String mother = binding.motherNameEdittext.getText().toString();
         String father = binding.fatherNameEdittext.getText().toString();
-
+        String D = String.valueOf(Day);
+        String M = String.valueOf(Month);
+        String Y = String.valueOf(Year);
+        Babydata bd = new Babydata(name,D,M,Y,"5",mother,father);
+        viewModel.Register_Baby_detail("6027c6a94eb9574f1d783967",bd);
+        viewModel.getGetbabyResponse().observe(this, data->{
+            if(data != null){
+                Toast.makeText(getActivity(),"Details saved",Toast.LENGTH_SHORT).show();
+                setFragment(new BottomNavFragment());
+            }else{
+                Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
     private void setFragment(Fragment fragment) {

@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.nirog.data.api.ApiHelper;
+import com.example.nirog.data.model.Babydata;
 import com.example.nirog.data.model.Login;
 import com.example.nirog.data.model.NEWSIGNUP;
 import com.example.nirog.data.model.RespomseBabyData;
@@ -54,6 +55,7 @@ public class HospitalViewModel extends AndroidViewModel {
         signUpResponse = new MutableLiveData<ResponseLogin>();
         LoginResponse = new MutableLiveData<ResponseLogin>();
         get_userResponse = new MutableLiveData<ResponseGet_user>();
+        getbabyResponse = new MutableLiveData<RespomseBabyData>();
     }
 
     public MutableLiveData<ResponseHosDetails> getAllHosDetailsRes()
@@ -97,6 +99,7 @@ public class HospitalViewModel extends AndroidViewModel {
     {
         return LoginResponse;
     }
+    public MutableLiveData<RespomseBabyData> getGetbabyResponse() { return getbabyResponse; }
 
 
     public void getAllHospitals()
@@ -284,5 +287,23 @@ public class HospitalViewModel extends AndroidViewModel {
         });
     }
 
+    public  void Register_Baby_detail(String id, Babydata bd)
+    {
+        apiHelper.Register_Baby(id,bd).enqueue(new Callback<RespomseBabyData>() {
+            @Override
+            public void onResponse(Call<RespomseBabyData> call, Response<RespomseBabyData> response) {
+                if(response.code()<300){
+                    getbabyResponse.postValue(response.body());
+                }
+                else{
+                    getbabyResponse.postValue(null);
+                }
+            }
 
+            @Override
+            public void onFailure(Call<RespomseBabyData> call, Throwable t) {
+                    getbabyResponse.postValue(null);
+            }
+        });
+    }
 }
