@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.example.nirog.R;
 import com.example.nirog.databinding.FragmentHospitalBinding;
 
@@ -55,6 +56,7 @@ public class HospitalFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentHospitalBinding.inflate(inflater, container, false);
         return binding.getRoot();
+
     }
 
     @Override
