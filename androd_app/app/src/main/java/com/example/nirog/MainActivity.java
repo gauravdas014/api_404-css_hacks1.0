@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
+import com.example.nirog.Account.ChildInputDetailsFragment;
 import com.example.nirog.MainDestinations.BottomNavFragment;
 import com.example.nirog.Splash.SplashFragment;
 import com.example.nirog.databinding.ActivityMainBinding;
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         //set up view binding for main activity
         mainBinding = ActivityMainBinding.inflate(getLayoutInflater());
 
-        setFragment(new BottomNavFragment());
+        setFragment(new ChildInputDetailsFragment());
 
         setContentView(mainBinding.getRoot());
     }
