@@ -1,10 +1,13 @@
 package com.example.nirog.Authentication;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -13,7 +16,11 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.nirog.Account.ChildInputDetailsFragment;
+import com.example.nirog.MainDestinations.BottomNavFragment;
 import com.example.nirog.R;
+import com.example.nirog.ViewModel.HospitalViewModel;
+import com.example.nirog.data.model.Signup;
 import com.example.nirog.databinding.FragmentSignupBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -21,13 +28,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.security.SignatureSpi;
+
 
 public class SignupFragment extends Fragment {
 
     //binding
     private FragmentSignupBinding binding;
-    private FirebaseAuth mAuth;
-    private ProgressBar progressBar;
+    private HospitalViewModel viewModel;
+    private SharedPreferences sharedPrefs;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,7 +45,7 @@ public class SignupFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentSignupBinding.inflate(inflater, container, false);
 
-        mAuth = FirebaseAuth.getInstance();
+        sharedPrefs= PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         binding.signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +66,7 @@ public class SignupFragment extends Fragment {
         String Email = binding.email.getText().toString();
         String Password = binding.password.getText().toString();
         String ConPassword = binding.confirmPassword.getText().toString();
+
         if(Email.length()==0){
             Toast.makeText(getActivity(),"please enter email filed",Toast.LENGTH_SHORT).show();
             binding.emailTxtiplayout.setError("Required Field");
@@ -64,7 +75,7 @@ public class SignupFragment extends Fragment {
         else if(Password.length()==0) {
             Toast.makeText(getActivity(), "please enter password field", Toast.LENGTH_SHORT).show();
             binding.passwordTxtiplayout.setError("Required Field");
-            progressBar.setVisibility(View.INVISIBLE);
+            binding.progressBarSignUp.setVisibility(View.INVISIBLE);
         }
         else if(ConPassword.length()==0) {
             Toast.makeText(getActivity(), "please enter password field", Toast.LENGTH_SHORT).show();
@@ -74,7 +85,7 @@ public class SignupFragment extends Fragment {
         else if(Password.length()<6){
             Toast.makeText(getActivity(), "Password length must be greater than 6", Toast.LENGTH_SHORT).show();
             binding.passwordTxtiplayout.setError("Required Field");
-            progressBar.setVisibility(View.INVISIBLE);
+            binding.progressBarSignUp.setVisibility(View.INVISIBLE);
         }
         else if(!Password.equals(ConPassword)){
             Toast.makeText(getActivity(), "Password and Confirm Password doen't match", Toast.LENGTH_SHORT).show();
@@ -83,12 +94,25 @@ public class SignupFragment extends Fragment {
             binding.progressBarSignUp.setVisibility(View.INVISIBLE);
         }
         else{
-            Signup();
+            signup();
         }
     }
 
-    private void Signup() {
-            //....sendapi.......
+    private void signup() {
+        Signup ss = new Signup("Raj Kishan","8298328476",binding.email.getText().toString(),"Muzaffarpur",binding.password.getText().toString());
+        viewModel.SignUp(ss);
+        viewModel.getSignUpResponse().observe(this, data->{
+            if(data != null){
+                String id = data.getUser_details().get_id();
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                editor.putString("User_id",id);
+                editor.apply();
+                Toast.makeText(getActivity(),"Signup Successfull",Toast.LENGTH_SHORT).show();
+                setFragment(new ChildInputDetailsFragment());
+            }else{
+                Toast.makeText(getContext(), "There is some error", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -119,5 +143,11 @@ public class SignupFragment extends Fragment {
 
         }
     };
+
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container,fragment);
+        fragmentTransaction.addToBackStack(null).commit();
+    }
 
 }

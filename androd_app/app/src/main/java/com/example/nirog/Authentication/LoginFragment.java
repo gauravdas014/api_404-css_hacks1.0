@@ -1,11 +1,14 @@
 package com.example.nirog.Authentication;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -14,7 +17,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.nirog.Account.ChildInputDetailsFragment;
+import com.example.nirog.MainDestinations.BottomNavFragment;
+import com.example.nirog.MainDestinations.Hospital.HospitalListAdapter;
 import com.example.nirog.R;
+import com.example.nirog.ViewModel.HospitalViewModel;
+import com.example.nirog.data.model.Login;
 import com.example.nirog.databinding.FragmentLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,8 +37,8 @@ public class LoginFragment extends Fragment {
 
     private SignupFragment signupFragment;
     private ForgotPasswordFragment forgotPasswordFragment;
-    private ChildInputDetailsFragment childInputDetailsFragment;
-    private FirebaseAuth mAuth;
+    private HospitalViewModel viewModel;
+    private SharedPreferences sharedPrefs;
 
 
     @Override
@@ -40,10 +47,13 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentLoginBinding.inflate(inflater, container, false);
 
-        mAuth = FirebaseAuth.getInstance();
+        sharedPrefs= PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+        viewModel = new ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.
+                getInstance(getActivity().getApplication())).get(HospitalViewModel.class);
+
         signupFragment = new SignupFragment();
         forgotPasswordFragment = new ForgotPasswordFragment();
-        childInputDetailsFragment = new ChildInputDetailsFragment();
 
         binding.signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,12 +96,30 @@ public class LoginFragment extends Fragment {
             binding.progresslogin.setVisibility(View.INVISIBLE);
         }
         else{
+            binding.progresslogin.setVisibility(View.VISIBLE);
             logincheck();
         }
     }
 
     private void logincheck() {
-      //.......apicode.....
+        Login login = new Login(binding.email.getText().toString(),binding.password.getText().toString());
+        viewModel.Login(login);
+        //Toast.makeText(getActivity(),"Running",Toast.LENGTH_SHORT).show();
+        viewModel.getLoginResponse().observe(this, data->{
+            if(data != null){
+                binding.progresslogin.setVisibility(View.INVISIBLE);
+                String id = data.getUser_details().get_id();
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                editor.putString("User_id",id);
+                editor.apply();
+                Toast.makeText(getActivity(),"Logged in Successfull",Toast.LENGTH_SHORT).show();
+                setFragment(new BottomNavFragment());
+            }else{
+                binding.progresslogin.setVisibility(View.INVISIBLE);
+                String error = data.getStatus();
+                Toast.makeText(getContext(), ""+error, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 

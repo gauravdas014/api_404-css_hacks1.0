@@ -68,16 +68,16 @@ public class ApiHelper implements ApiService{
 
     @Override
     public Call<ResponseLogin> signUp_User(Signup signup) {
-        return signUp_User(signup);
+        return api.signUp_User(signup);
     }
 
     @Override
     public Call<ResponseLogin> Login_user(Login login) {
-        return Login_user(login);
+        return api.Login_user(login);
     }
 
     @Override
     public Call<ResponseGet_user> GET_USER(String id) {
-        return GET_USER(id);
+        return api.GET_USER(id);
     }
 }

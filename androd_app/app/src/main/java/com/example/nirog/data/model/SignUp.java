@@ -1,30 +1,17 @@
 package com.example.nirog.data.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+public class Signup {
+    String name;
+    String phone;
+    String email;
+    String address;
+    String password;
 
-public class SignUp {
-
-    @SerializedName("name")
-    @Expose
-    private String name;
-
-    @SerializedName("email")
-    @Expose
-    private String email;
-
-    @SerializedName("phone")
-    @Expose
-    private String phone;
-
-    @SerializedName("password")
-    @Expose
-    private String password;
-
-    public SignUp(String name, String email, String phone, String password) {
+    public Signup(String name, String phone, String email, String address, String password) {
         this.name = name;
-        this.email = email;
         this.phone = phone;
+        this.email = email;
+        this.address = address;
         this.password = password;
     }
 
@@ -36,6 +23,14 @@ public class SignUp {
         this.name = name;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -44,12 +39,12 @@ public class SignUp {
         this.email = email;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getAddress() {
+        return address;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getPassword() {
