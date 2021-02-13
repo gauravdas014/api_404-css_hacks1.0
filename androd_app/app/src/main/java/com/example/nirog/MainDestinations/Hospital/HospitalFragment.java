@@ -3,6 +3,7 @@ package com.example.nirog.MainDestinations.Hospital;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.example.nirog.R;
+import com.example.nirog.ViewModel.HospitalViewModel;
 import com.example.nirog.databinding.FragmentHospitalBinding;
 
 
@@ -21,6 +23,7 @@ public class HospitalFragment extends Fragment {
 
     //setting view binding
     private FragmentHospitalBinding binding;
+    HospitalViewModel hospitalViewModel;
 
 
     private String mParam1;
@@ -48,6 +51,7 @@ public class HospitalFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        hospitalViewModel = new ViewModelProvider(this).get(HospitalViewModel.class);
     }
 
     @Override
@@ -56,6 +60,8 @@ public class HospitalFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentHospitalBinding.inflate(inflater, container, false);
         return binding.getRoot();
+
+
 
     }
 
