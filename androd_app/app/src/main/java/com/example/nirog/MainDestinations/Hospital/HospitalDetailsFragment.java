@@ -5,13 +5,16 @@ import android.os.Bundle;
 
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.example.nirog.R;
+import com.example.nirog.ViewModel.HospitalViewModel;
 import com.example.nirog.databinding.FragmentHospitalDetailsBinding;
 import com.google.android.material.transition.MaterialContainerTransform;
 import com.google.android.material.transition.MaterialElevationScale;
@@ -29,6 +32,10 @@ public class HospitalDetailsFragment extends Fragment{
 
     //view binding
     private FragmentHospitalDetailsBinding binding;
+    //initializing view model for getting hospital data
+    private HospitalViewModel viewModel;
+    //string for storing url
+    private String imageUrl;
 
 
     private String mHospitalName;
@@ -66,6 +73,10 @@ public class HospitalDetailsFragment extends Fragment{
             mPosition = getArguments().getInt(POSITION);
 
         }
+
+        //creating an instance of view model
+        viewModel = new ViewModelProvider(this,
+                ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(HospitalViewModel.class);
     }
 
     @Override
@@ -84,6 +95,25 @@ public class HospitalDetailsFragment extends Fragment{
         //setting the views
         binding.collapsingToolbar.setTitle(mHospitalName);
         binding.addtionalInfo.setText("Phone: " + mContact + "\n" + "Address: " + mAddress);
+
+        //getting the data of particular hospital through id
+        viewModel.getHospital(mId);
+        //getting the response
+        viewModel.getHospitalResponse().observe(this, data->{
+            if(data != null){
+                imageUrl = data.getHospitalDetails().getImage();
+                binding.description.setText(data.getHospitalDetails().getDescription());
+            }else{
+
+            }
+        });
+
+        //setting image from the url
+        Glide.with(getContext())
+                .load(imageUrl)
+                .placeholder(R.drawable.placeholder_drawable)
+                .centerCrop()
+                .into(binding.hospitalImageDetail);
 
 
         return binding.getRoot();
