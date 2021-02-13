@@ -1,39 +1,40 @@
 package com.example.nirog.MainDestinations.Hospital;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
 import com.example.nirog.R;
-import com.example.nirog.databinding.FragmentHospitalBinding;
+import com.example.nirog.databinding.FragmentHospitalDetailsBinding;
+import com.google.gson.TypeAdapterFactory;
 
 
-public class HospitalFragment extends Fragment {
+public class HospitalDetailsFragment extends Fragment {
 
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    //setting view binding
-    private FragmentHospitalBinding binding;
+    //view binding
+    private FragmentHospitalDetailsBinding binding;
 
 
     private String mParam1;
     private String mParam2;
 
-    public HospitalFragment() {
+    public HospitalDetailsFragment() {
         // Required empty public constructor
     }
 
 
-
-    public static HospitalFragment newInstance(String param1, String param2) {
-        HospitalFragment fragment = new HospitalFragment();
+    public static HospitalDetailsFragment newInstance(String param1, String param2) {
+        HospitalDetailsFragment fragment = new HospitalDetailsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -54,14 +55,15 @@ public class HospitalFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentHospitalBinding.inflate(inflater, container, false);
+        binding = FragmentHospitalDetailsBinding.inflate(inflater, container, false);
+
+
+        //custom font for collapsing toolbar layout
+        Typeface typeface = ResourcesCompat.getFont(getContext(), R.font.poppins_bold);
+        binding.collapsingToolbar.setExpandedTitleTypeface(typeface);
+        binding.collapsingToolbar.setCollapsedTitleTypeface(typeface);
+
+
         return binding.getRoot();
-
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
     }
 }

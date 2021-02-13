@@ -1,4 +1,4 @@
-package com.example.nirog.MainDestinations.Hospital;
+package com.example.nirog.Account;
 
 import android.os.Bundle;
 
@@ -8,32 +8,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
 import com.example.nirog.R;
-import com.example.nirog.databinding.FragmentHospitalBinding;
+import com.example.nirog.databinding.FragmentChildAccountBinding;
+import com.example.nirog.databinding.FragmentChildInputDetailsBinding;
 
 
-public class HospitalFragment extends Fragment {
+public class ChildAccountFragment extends Fragment {
 
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    //setting view binding
-    private FragmentHospitalBinding binding;
+    //view binding
+    private FragmentChildAccountBinding binding;
 
 
     private String mParam1;
     private String mParam2;
 
-    public HospitalFragment() {
+    public ChildAccountFragment() {
         // Required empty public constructor
     }
 
 
-
-    public static HospitalFragment newInstance(String param1, String param2) {
-        HospitalFragment fragment = new HospitalFragment();
+    public static ChildAccountFragment newInstance(String param1, String param2) {
+        ChildAccountFragment fragment = new ChildAccountFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -54,14 +53,7 @@ public class HospitalFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentHospitalBinding.inflate(inflater, container, false);
+        binding = FragmentChildAccountBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
     }
 }

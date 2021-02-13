@@ -56,13 +56,13 @@ public class SignupFragment extends Fragment {
         String Email = binding.email.getText().toString();
         String Password = binding.password.getText().toString();
         String ConPassword = binding.confirmPassword.getText().toString();
-        String User_Name = binding.username.getText().toString();
-        if(User_Name.length()==0){
+        //String User_Name = binding.username.getText().toString();
+        /*if(User_Name.length()==0){
             Toast.makeText(getActivity(),"please enter your name",Toast.LENGTH_SHORT).show();
             binding.usernameTxtiplayout.setError("Required Field");
             binding.progressBarSignUp.setVisibility(View.INVISIBLE);
-        }
-        else if(Email.length()==0){
+        }*/
+         if(Email.length()==0){
             Toast.makeText(getActivity(),"please enter email filed",Toast.LENGTH_SHORT).show();
             binding.emailTxtiplayout.setError("Required Field");
             binding.progressBarSignUp.setVisibility(View.INVISIBLE);
@@ -128,13 +128,13 @@ public class SignupFragment extends Fragment {
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            String usernameInput = binding.username.getText().toString().trim();
+            //String usernameInput = binding.username.getText().toString().trim();
             String emailInput = binding.email.getText().toString().trim();
             String passwordInput = binding.password.getText().toString().trim();
             String confirmPasswordInput = binding.confirmPassword.getText().toString().trim();
 
             //enable button whenever there is input in all the fields
-            binding.signUpBtn.setEnabled(!usernameInput.isEmpty() && !emailInput.isEmpty() && !passwordInput.isEmpty() && !confirmPasswordInput.isEmpty());
+            binding.signUpBtn.setEnabled(!emailInput.isEmpty() && !passwordInput.isEmpty() && !confirmPasswordInput.isEmpty());
 
         }
 
