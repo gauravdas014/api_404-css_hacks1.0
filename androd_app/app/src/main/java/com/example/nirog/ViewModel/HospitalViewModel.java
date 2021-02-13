@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.example.nirog.data.api.ApiHelper;
 import com.example.nirog.data.model.ResponseDocDetails;
@@ -189,5 +190,4 @@ public class HospitalViewModel extends AndroidViewModel {
             }
         });
     }
-
 }
