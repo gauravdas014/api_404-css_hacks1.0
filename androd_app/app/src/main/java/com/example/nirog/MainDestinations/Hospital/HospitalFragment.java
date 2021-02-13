@@ -55,7 +55,8 @@ public class HospitalFragment extends Fragment {
         }
 
         // initializing the view model
-        viewModel = new ViewModelProvider(this).get(HospitalViewModel.class);
+        viewModel = new ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.
+                getInstance(getActivity().getApplication())).get(HospitalViewModel.class);
 
     }
 
