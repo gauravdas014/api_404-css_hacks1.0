@@ -20,6 +20,7 @@ import com.example.nirog.Account.ChildInputDetailsFragment;
 import com.example.nirog.MainDestinations.BottomNavFragment;
 import com.example.nirog.R;
 import com.example.nirog.ViewModel.HospitalViewModel;
+import com.example.nirog.data.model.NEWSIGNUP;
 import com.example.nirog.data.model.Signup;
 import com.example.nirog.databinding.FragmentSignupBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -100,7 +101,9 @@ public class SignupFragment extends Fragment {
     }
 
     private void signup() {
-        Signup ss = new Signup("Raj Kishan","8298328476",binding.email.getText().toString(),"Muzaffarpur",binding.password.getText().toString());
+        String email = binding.email.getText().toString();
+        String pass = binding.confirmPassword.getText().toString();
+        NEWSIGNUP ss = new NEWSIGNUP("Raj kishan","rajkishan101@gmail.com","45874521410","Muzaffarpur","123456");
         viewModel.SignUp(ss);
         viewModel.getSignUpResponse().observe(this, data->{
             if(data != null){

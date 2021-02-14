@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.nirog.Retrofit.RetrofitProvider;
 import com.example.nirog.data.model.Login;
+import com.example.nirog.data.model.NEWSIGNUP;
 import com.example.nirog.data.model.ResponseDocDetails;
 import com.example.nirog.data.model.ResponseDoctor;
 import com.example.nirog.data.model.ResponseGet_user;
@@ -66,7 +67,7 @@ public class ApiHelper implements ApiService{
     }
 
     @Override
-    public Call<ResponseLogin> signUp_User(Signup signup) {
+    public Call<ResponseLogin> signUp_User(NEWSIGNUP signup) {
         return api.signUp_User(signup);
     }
 

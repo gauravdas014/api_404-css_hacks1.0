@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.nirog.data.api.ApiHelper;
 import com.example.nirog.data.model.Login;
+import com.example.nirog.data.model.NEWSIGNUP;
 import com.example.nirog.data.model.ResponseDocDetails;
 import com.example.nirog.data.model.ResponseDoctor;
 import com.example.nirog.data.model.ResponseGet_user;
@@ -218,7 +219,7 @@ public class HospitalViewModel extends AndroidViewModel {
         });
     }
 
-    public void SignUp(Signup signup)
+    public void SignUp(NEWSIGNUP signup)
     {
         apiHelper.signUp_User(signup).enqueue(new Callback<ResponseLogin>() {
             @Override

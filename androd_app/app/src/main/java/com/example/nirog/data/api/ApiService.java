@@ -1,6 +1,7 @@
 package com.example.nirog.data.api;
 
 import com.example.nirog.data.model.Login;
+import com.example.nirog.data.model.NEWSIGNUP;
 import com.example.nirog.data.model.ResponseDocDetails;
 import com.example.nirog.data.model.ResponseDoctor;
 import com.example.nirog.data.model.ResponseGet_user;
@@ -37,7 +38,7 @@ public interface ApiService {
     Call<ResponseVaccineDetails> GetAllVaccines();
 
     @POST("api/user/signup")
-    Call<ResponseLogin> signUp_User(@Body Signup signup);
+    Call<ResponseLogin> signUp_User(@Body NEWSIGNUP signup);
 
     @POST("api/user/login")
     Call<ResponseLogin> Login_user(@Body Login login);

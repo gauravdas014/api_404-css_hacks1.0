@@ -1,16 +1,17 @@
 package com.example.nirog.data.model;
 
-public class Signup {
+public class NEWSIGNUP {
+
     String name;
     String email;
     String phone;
     String address;
     String password;
 
-    public Signup(String name, String phone, String email, String address, String password) {
+    public NEWSIGNUP(String name, String email, String phone, String address, String password) {
         this.name = name;
-        this.phone = phone;
         this.email = email;
+        this.phone = phone;
         this.address = address;
         this.password = password;
     }
@@ -23,20 +24,20 @@ public class Signup {
         this.name = name;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getAddress() {
