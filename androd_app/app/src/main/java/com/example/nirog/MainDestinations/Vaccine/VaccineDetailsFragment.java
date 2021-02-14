@@ -19,8 +19,12 @@ public class VaccineDetailsFragment extends Fragment {
 
 
     private static final String VACCINE_NAME = "param1";
-    private static final String DOSE = "param2";
+    private static final String VACCINE_ID = "param2";
     private static final String WHEN_TO_GIVE = "param2";
+    private static final String DOSE = "dose";
+    private static final String ROUTE = "route";
+    private static final String SITE = "site";
+    private static final String DESC = "description";
     private static final String POSITION = "0";
 
     //view binding
@@ -30,8 +34,12 @@ public class VaccineDetailsFragment extends Fragment {
 
 
     private String mVaccineName;
-    private String mDose;
+    private String mVaccineId;
     private String mWhenToGive;
+    private String mDose;
+    private String mRoute;
+    private String mSite;
+    private String mDescription;
     private int mPosition;
 
     public VaccineDetailsFragment() {
@@ -39,12 +47,26 @@ public class VaccineDetailsFragment extends Fragment {
     }
 
 
-    public static VaccineDetailsFragment newInstance(String vaccineName, String dose, String whenToGive, int position) {
+    public static VaccineDetailsFragment newInstance(
+            String vaccineName,
+            String vaccineId,
+            String whenToGive,
+            int position,
+            String dose,
+            String route,
+            String site,
+            String description) {
+
+
         VaccineDetailsFragment fragment = new VaccineDetailsFragment();
         Bundle args = new Bundle();
         args.putString(VACCINE_NAME, vaccineName);
-        args.putString(DOSE, dose);
+        args.putString(VACCINE_ID, vaccineId);
         args.putString(WHEN_TO_GIVE, whenToGive);
+        args.putString(DOSE, dose);
+        args.putString(ROUTE, route);
+        args.putString(SITE, site);
+        args.putString(DESC, description);
         args.putInt(POSITION, position);
         fragment.setArguments(args);
         return fragment;
@@ -54,9 +76,13 @@ public class VaccineDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mDose = getArguments().getString(DOSE);
+            mVaccineId = getArguments().getString(VACCINE_ID);
             mVaccineName = getArguments().getString(VACCINE_NAME);
             mWhenToGive = getArguments().getString(WHEN_TO_GIVE);
+            mDose = getArguments().getString(DOSE);
+            mRoute = getArguments().getString(ROUTE);
+            mSite = getArguments().getString(SITE);
+            mDescription = getArguments().getString(DESC);
             mPosition = getArguments().getInt(POSITION);
         }
 
@@ -73,6 +99,10 @@ public class VaccineDetailsFragment extends Fragment {
         //setting the text fields from the data of bundle
         binding.vaccineNameDetailed.setText(mVaccineName);
         binding.whenToGiveIt.setText(mWhenToGive);
+        binding.site.setText(mSite);
+        binding.route.setText(mRoute);
+        binding.description.setText(mDescription);
+        binding.dose.setText(mDose);
 
 
 
