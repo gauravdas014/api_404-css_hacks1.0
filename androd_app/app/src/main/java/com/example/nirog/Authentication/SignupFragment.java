@@ -101,8 +101,30 @@ public class SignupFragment extends Fragment {
         }
         else{
             binding.progressBarSignUp.setVisibility(View.VISIBLE);
-            signup();
+            signupfirebase();
         }
+    }
+
+    private void signupfirebase() {
+        FirebaseAuth mAuth;
+        mAuth = FirebaseAuth.getInstance();
+        String mail = binding.email.getText().toString();
+        String pa = binding.password.getText().toString();
+
+        mAuth.createUserWithEmailAndPassword(mail,pa).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(getActivity(),"Signup completed",Toast.LENGTH_SHORT).show();
+                    setFragment(new ChildInputDetailsFragment());
+                }
+                else{
+                    if(task.getException()!=null){
+                        Toast.makeText(getActivity(),"Fail",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
     }
 
     private void signup() {
