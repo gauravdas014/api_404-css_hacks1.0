@@ -3,8 +3,10 @@ package com.example.nirog.data.api;
 import android.content.Context;
 
 import com.example.nirog.Retrofit.RetrofitProvider;
+import com.example.nirog.data.model.Babydata;
 import com.example.nirog.data.model.Login;
 import com.example.nirog.data.model.NEWSIGNUP;
+import com.example.nirog.data.model.RespomseBabyData;
 import com.example.nirog.data.model.ResponseDocDetails;
 import com.example.nirog.data.model.ResponseDoctor;
 import com.example.nirog.data.model.ResponseGet_user;
@@ -80,4 +82,7 @@ public class ApiHelper implements ApiService{
     public Call<ResponseGet_user> GET_USER(String id) {
         return api.GET_USER(id);
     }
+
+    @Override
+    public Call<RespomseBabyData> Register_Baby(Babydata bd) { return api.Register_Baby(bd); }
 }

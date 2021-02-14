@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.nirog.data.api.ApiHelper;
 import com.example.nirog.data.model.Login;
 import com.example.nirog.data.model.NEWSIGNUP;
+import com.example.nirog.data.model.RespomseBabyData;
 import com.example.nirog.data.model.ResponseDocDetails;
 import com.example.nirog.data.model.ResponseDoctor;
 import com.example.nirog.data.model.ResponseGet_user;
@@ -37,6 +38,7 @@ public class HospitalViewModel extends AndroidViewModel {
     private MutableLiveData<ResponseLogin> signUpResponse;
     private MutableLiveData<ResponseLogin> LoginResponse;
     private MutableLiveData<ResponseGet_user> get_userResponse;
+    private MutableLiveData<RespomseBabyData> getbabyResponse;
 
 
 
@@ -281,4 +283,6 @@ public class HospitalViewModel extends AndroidViewModel {
             }
         });
     }
+
+
 }

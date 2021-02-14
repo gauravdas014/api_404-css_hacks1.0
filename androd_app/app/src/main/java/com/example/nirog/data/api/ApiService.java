@@ -1,7 +1,9 @@
 package com.example.nirog.data.api;
 
+import com.example.nirog.data.model.Babydata;
 import com.example.nirog.data.model.Login;
 import com.example.nirog.data.model.NEWSIGNUP;
+import com.example.nirog.data.model.RespomseBabyData;
 import com.example.nirog.data.model.ResponseDocDetails;
 import com.example.nirog.data.model.ResponseDoctor;
 import com.example.nirog.data.model.ResponseGet_user;
@@ -45,4 +47,8 @@ public interface ApiService {
 
     @GET("api/user/{userId}")
     Call<ResponseGet_user> GET_USER(@Path("userId") String id);
+
+    @GET("api/user/baby/register/{userId}")
+    Call<RespomseBabyData> Register_Baby(@Path("userId") Babydata bd);
+
 }
