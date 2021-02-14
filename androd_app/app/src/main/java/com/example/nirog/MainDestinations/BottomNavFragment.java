@@ -86,11 +86,9 @@ public class BottomNavFragment extends Fragment implements BottomNavigationView.
                 setFragment(new HospitalFragment());
                 break;
             case R.id.guide_destination:
-                //TODO: Make guide fragment
                 setFragment(new GuideFragment());
                 break;
             case R.id.account_destination:
-                //TODO: Make settings fragment
                 setFragment(new AccountFragment());
                 break;
         }

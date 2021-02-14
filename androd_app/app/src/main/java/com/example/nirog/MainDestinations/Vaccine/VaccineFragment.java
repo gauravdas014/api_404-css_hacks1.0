@@ -78,17 +78,20 @@ public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVa
         sharedPrefs= PreferenceManager.getDefaultSharedPreferences(getActivity());
 
 
+        retrieveBabyData();
 
-        binding.babyNameTv.setOnClickListener(new View.OnClickListener() {
+        /*binding.babyNameTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences.Editor editor = sharedPrefs.edit();
                 editor.putString("User_id",null);
                 editor.apply();
                 setFragment(new LoginFragment());
-                retrieveBabyData();
+
             }
-        });
+        });*/
+
+
         hospitalViewModel.getAllVaccines();
         hospitalViewModel.getALLVaccinesRes().observe(this,data->{
             if(data != null){
@@ -109,7 +112,7 @@ public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVa
         String userId = sharedPrefs.getString("User_id",null);
         hospitalViewModel.Get_Baby_Data(userId);
         Log.e(userId,"baby user id");
-        hospitalViewModel.getGetBabyDataResponse().observe(this, data->{
+        hospitalViewModel.getGetbabyResponse().observe(this, data->{
             if(data != null){
                 String name = data.getBaby_details().getName();
                 String Father = data.getBaby_details().getFatherName();
