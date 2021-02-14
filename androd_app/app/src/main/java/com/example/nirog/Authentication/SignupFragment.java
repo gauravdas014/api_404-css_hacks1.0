@@ -94,6 +94,7 @@ public class SignupFragment extends Fragment {
             binding.progressBarSignUp.setVisibility(View.INVISIBLE);
         }
         else{
+            binding.progressBarSignUp.setVisibility(View.VISIBLE);
             signup();
         }
     }
@@ -103,6 +104,7 @@ public class SignupFragment extends Fragment {
         viewModel.SignUp(ss);
         viewModel.getSignUpResponse().observe(this, data->{
             if(data != null){
+                binding.progressBarSignUp.setVisibility(View.INVISIBLE);
                 String id = data.getUser_details().get_id();
                 SharedPreferences.Editor editor = sharedPrefs.edit();
                 editor.putString("User_id",id);
@@ -110,6 +112,7 @@ public class SignupFragment extends Fragment {
                 Toast.makeText(getActivity(),"Signup Successfull",Toast.LENGTH_SHORT).show();
                 setFragment(new ChildInputDetailsFragment());
             }else{
+                binding.progressBarSignUp.setVisibility(View.INVISIBLE);
                 Toast.makeText(getContext(), "There is some error", Toast.LENGTH_SHORT).show();
             }
         });

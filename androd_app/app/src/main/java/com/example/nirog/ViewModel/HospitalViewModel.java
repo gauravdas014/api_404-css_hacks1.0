@@ -225,8 +225,10 @@ public class HospitalViewModel extends AndroidViewModel {
             public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
                 if(response.code()<300) {
                     signUpResponse.postValue(response.body());
+                    Log.i("Api:",""+response.code());
                 }else if(response.code()>400) {
                     signUpResponse.postValue(null);
+                    Log.i("Api:",""+response.code());
                 }
             }
 
@@ -245,8 +247,10 @@ public class HospitalViewModel extends AndroidViewModel {
             public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
                 if(response.code()<300) {
                     LoginResponse.postValue(response.body());
+                    Log.i("Api:",""+response.code());
                 }else if(response.code()>400) {
                     LoginResponse.postValue(null);
+                    Log.i("Api:",""+response.code());
                 }
             }
 

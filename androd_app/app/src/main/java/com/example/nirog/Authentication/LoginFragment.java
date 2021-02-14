@@ -104,7 +104,6 @@ public class LoginFragment extends Fragment {
     private void logincheck() {
         Login login = new Login(binding.email.getText().toString(),binding.password.getText().toString());
         viewModel.Login(login);
-        //Toast.makeText(getActivity(),"Running",Toast.LENGTH_SHORT).show();
         viewModel.getLoginResponse().observe(this, data->{
             if(data != null){
                 binding.progresslogin.setVisibility(View.INVISIBLE);
