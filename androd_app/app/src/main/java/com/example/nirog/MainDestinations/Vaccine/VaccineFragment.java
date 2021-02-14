@@ -23,6 +23,7 @@ import com.example.nirog.R;
 import com.example.nirog.Splash.SplashFragment;
 import com.example.nirog.ViewModel.HospitalViewModel;
 import com.example.nirog.databinding.FragmentVaccineBinding;
+import com.google.android.material.transition.MaterialElevationScale;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -114,7 +115,7 @@ public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVa
         String userId = sharedPrefs.getString("User_id",null);
         hospitalViewModel.Get_Baby_Data(userId);
         Log.e(userId,"baby user id");
-        hospitalViewModel.getGetBabyDataResponse().observe(this, data->{
+        hospitalViewModel.getGetbabyResponse().observe(this, data->{
             if(data != null){
                 String name = data.getBaby_details().getName();
                 String Father = data.getBaby_details().getFatherName();
@@ -146,6 +147,16 @@ public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVa
 
     @Override
     public void onClickListener(int position, String vaccineId, String vaccineName, String whenToGive, String dose, String route, String site, String description) {
+
+        VaccineDetailsFragment vaccineDetailsFragment = VaccineDetailsFragment.newInstance(vaccineName, vaccineId, whenToGive, position, dose, route, site, description);
+
+        vaccineDetailsFragment.setEnterTransition(new MaterialElevationScale(true));
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, vaccineDetailsFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+
 
     }
 }
