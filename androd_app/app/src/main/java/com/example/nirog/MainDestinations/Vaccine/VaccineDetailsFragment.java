@@ -15,26 +15,32 @@ import com.example.nirog.databinding.FragmentVaccineDetailsBinding;
 public class VaccineDetailsFragment extends Fragment {
 
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String VACCINE_NAME = "param1";
+    private static final String VACCINE_ID = "param2";
+    private static final String WHEN_TO_GIVE = "param2";
+    private static final String POSITION = "0";
 
     //view binding
     private FragmentVaccineDetailsBinding binding;
 
 
-    private String mParam1;
-    private String mParam2;
+    private String mVaccineName;
+    private String mVaccineId;
+    private String mWhenToGive;
+    private int mPosition;
 
     public VaccineDetailsFragment() {
         // Required empty public constructor
     }
 
 
-    public static VaccineDetailsFragment newInstance(String param1, String param2) {
+    public static VaccineDetailsFragment newInstance(String vaccineName, String vaccineId, String whenToGive, int position) {
         VaccineDetailsFragment fragment = new VaccineDetailsFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(VACCINE_NAME, vaccineName);
+        args.putString(VACCINE_ID, vaccineId);
+        args.putString(WHEN_TO_GIVE, whenToGive);
+        args.putInt(POSITION, position);
         fragment.setArguments(args);
         return fragment;
     }
@@ -43,8 +49,10 @@ public class VaccineDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mVaccineId = getArguments().getString(VACCINE_ID);
+            mVaccineName = getArguments().getString(VACCINE_NAME);
+            mWhenToGive = getArguments().getString(WHEN_TO_GIVE);
+            mPosition = getArguments().getInt(POSITION);
         }
     }
 
