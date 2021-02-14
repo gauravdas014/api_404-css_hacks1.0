@@ -109,7 +109,7 @@ public class LoginFragment extends Fragment {
                 binding.progresslogin.setVisibility(View.INVISIBLE);
                 String id = data.getUser_details().get_id();
                 SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString("User_id",id);
+                editor.putString("USER_ID",id);
                 editor.apply();
                 Toast.makeText(getActivity(),"Logged in Successfull",Toast.LENGTH_SHORT).show();
                 setFragment(new BottomNavFragment());
