@@ -39,8 +39,6 @@ At present, our application mainly focuses on the new borns and the hospital aut
 With the help of our application we are trying to creat an `ecosystem` which will connect all the common people (both rural and urdan) and the medical authority (both private and government as well).
 ![Image](C:\Users\SHARMISTHA DAS\Downloads "Eco-System")
 
-<<<<<<< HEAD
-
 ## Conclusion
 
 =======
@@ -50,8 +48,6 @@ With the help of our application we are trying to creat an `ecosystem` which wil
 As we know there are many people out there, those who dont know regarding the lastest medical facilities given by our government and the guidelines or measures to be
 followed to stay fit and healthy. With the help of this application we are trying to bridge the gap between the hospitals and the common people and make the common
 peoples aware .
-
-> > > > > > > ab2d2481a05d144172d89d5c572cbe2123280b89
 
 As we know there are many people out there, those who dont know regarding the lastest medical facilities given by our government and the guidelines or measures to be
 followed to stay fit and healthy. With the help of this application we are trying to bridge the gap between the hospitals and the common people and make the common
