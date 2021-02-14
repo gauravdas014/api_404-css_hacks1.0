@@ -4,12 +4,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.nirog.Authentication.LoginFragment;
 import com.example.nirog.R;
 import com.example.nirog.databinding.FragmentAccountBinding;
 
@@ -34,11 +36,20 @@ public class AccountFragment extends Fragment {
         binding.buttonLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                editor.putString("USER_ID", null);
+                editor.apply();
+                setFragment(new LoginFragment());
             }
         });
 
         return binding.getRoot();
+    }
+
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container,fragment);
+        fragmentTransaction.addToBackStack(null).commit();
     }
 
     @Override

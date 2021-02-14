@@ -97,9 +97,32 @@ public class LoginFragment extends Fragment {
         }
         else{
             binding.progresslogin.setVisibility(View.VISIBLE);
-            logincheck();
+            logincheckFirebase();
         }
     }
+
+    private void logincheckFirebase() {
+        FirebaseAuth mAuth;
+        mAuth = FirebaseAuth.getInstance();
+        String mail = binding.email.getText().toString();
+        String pa = binding.password.getText().toString();
+
+        mAuth.signInWithEmailAndPassword(mail,pa).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(getActivity(),"Signin completed",Toast.LENGTH_SHORT).show();
+                    setFragment(new BottomNavFragment());
+                }
+                else{
+                    if(task.getException()!=null){
+                        Toast.makeText(getActivity(),"Error in login",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+    }
+
 
     private void logincheck() {
         Login login = new Login(binding.email.getText().toString(),binding.password.getText().toString());
@@ -119,6 +142,7 @@ public class LoginFragment extends Fragment {
             }
         });
     }
+
 
 
     private void setFragment(Fragment fragment) {
