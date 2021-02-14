@@ -20,6 +20,7 @@ import com.example.nirog.data.model.ResponseHospital;
 import com.example.nirog.data.model.ResponseLogin;
 import com.example.nirog.data.model.ResponseVaccine;
 import com.example.nirog.data.model.ResponseVaccineDetails;
+import com.example.nirog.data.model.VTaken;
 
 
 import retrofit2.Call;
@@ -41,6 +42,8 @@ public class HospitalViewModel extends AndroidViewModel {
     private MutableLiveData<ResponseGet_user> get_userResponse;
     private MutableLiveData<RespomseBabyData> getbabyResponse;
     private MutableLiveData<RespomseBabyData> getBabyDataResponse;
+    private MutableLiveData<RespomseBabyData> addResponse;
+    private MutableLiveData<RespomseBabyData> removeResponse;
 
 
 
@@ -58,6 +61,8 @@ public class HospitalViewModel extends AndroidViewModel {
         get_userResponse = new MutableLiveData<ResponseGet_user>();
         getbabyResponse = new MutableLiveData<RespomseBabyData>();
         getBabyDataResponse = new MutableLiveData<RespomseBabyData>();
+        addResponse = new MutableLiveData<RespomseBabyData>();
+        removeResponse = new MutableLiveData<RespomseBabyData>();
     }
 
     public MutableLiveData<ResponseHosDetails> getAllHosDetailsRes()
@@ -103,6 +108,16 @@ public class HospitalViewModel extends AndroidViewModel {
     }
     public MutableLiveData<RespomseBabyData> getGetbabyResponse() { return getbabyResponse; }
     public MutableLiveData<RespomseBabyData> getGetBabyDataResponse() { return getBabyDataResponse; }
+
+    public MutableLiveData<RespomseBabyData>  AddVaccinesTakenRes()
+    {
+        return  addResponse;
+    }
+
+    public MutableLiveData<RespomseBabyData> RemoveVaccinesRes()
+    {
+        return removeResponse;
+    }
 
 
     public void getAllHospitals()
@@ -327,9 +342,56 @@ public class HospitalViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<RespomseBabyData> call, Throwable t) {
-
+                getbabyResponse.postValue(null);
             }
         });
     }
+
+    public void AddVaccinesTaken(VTaken vTaken)
+    {
+        apiHelper.AddVaccinesTaken(vTaken).enqueue(new Callback<RespomseBabyData>() {
+            @Override
+            public void onResponse(Call<RespomseBabyData> call, Response<RespomseBabyData> response) {
+                if(response.code()<300){
+                    addResponse.postValue(response.body());
+                    Log.i("Api response: ",""+response.code());
+                }
+                else if(response.code()>400){
+                    addResponse.postValue(null);
+                    Log.i("Api response: ",""+response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RespomseBabyData> call, Throwable t) {
+                addResponse.postValue(null);
+
+            }
+        });
+
+    }
+
+    public void RemoveVaccines(VTaken vTaken)
+    {
+        apiHelper.RemoveVaccine(vTaken).enqueue(new Callback<RespomseBabyData>() {
+            @Override
+            public void onResponse(Call<RespomseBabyData> call, Response<RespomseBabyData> response) {
+                if(response.code()<300){
+                    removeResponse.postValue(response.body());
+                    Log.i("Api response: ",""+response.code());
+                }
+                else if(response.code()>400){
+                    removeResponse.postValue(null);
+                    Log.i("Api response: ",""+response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RespomseBabyData> call, Throwable t) {
+                removeResponse.postValue(null);
+            }
+        });
+    }
+
 
 }
