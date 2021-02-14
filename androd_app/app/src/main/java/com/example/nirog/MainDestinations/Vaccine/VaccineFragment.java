@@ -73,7 +73,7 @@ public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVa
         binding = FragmentVaccineBinding.inflate(inflater, container, false);
         sharedPrefs= PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-        hospitalViewModel.getAllVaccines();
+
         retrieveBabyData();
 
         binding.babyNameTv.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +85,7 @@ public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVa
                 setFragment(new LoginFragment());
             }
         });
-
+        hospitalViewModel.getAllVaccines();
         hospitalViewModel.getALLVaccinesRes().observe(this,data->{
             if(data != null){
                 adapter = new VaccineListAdapter(data.getVaccineDetails(), getContext(), this::onClickListener);
@@ -119,7 +119,7 @@ public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVa
                 Toast.makeText(getContext(), "There is some error", Toast.LENGTH_SHORT).show();
             }
         });
-    }
+   }
 
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
