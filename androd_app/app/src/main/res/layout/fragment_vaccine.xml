@@ -33,7 +33,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="10dp"
                 android:fontFamily="@font/poppins_semi_bold"
-                android:text="Logout"
+                android:text="Baby's Name"
                 android:textSize="22dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -89,7 +89,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_semi_bold"
-        android:text="Upcoming Vaccines"
+        android:text="Vaccines"
         app:layout_constraintTop_toBottomOf="@id/baby_data_card_view"
         android:layout_marginStart="12dp"
         app:layout_constraintStart_toEndOf="@id/heading_tag_card_view"

@@ -71,7 +71,7 @@
                 android:padding="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/vaccine_image" />
+                app:layout_constraintTop_toBottomOf="@+id/short_name" />
 
             <TextView
                 android:id="@+id/when_to_give_help"
