@@ -124,8 +124,10 @@ public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVa
                 if(snapshot.exists()){
                     String name = snapshot.child(user).child("name").getValue(String.class);
                     String father = snapshot.child(user).child("father").getValue(String.class);
+                    String mother = snapshot.child(user).child("mother").getValue(String.class);
                     binding.babyNameTv.setText(name);
                     binding.babyFatherTv.setText(father);
+                    binding.babyMotherTv.setText(mother);
                 }
             }
 
