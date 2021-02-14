@@ -37,6 +37,7 @@ public class ChildInputDetailsFragment extends Fragment implements DatePickerDia
     private int Day=0;
     private int Month=0;
     private int Year=0;
+    private String gender = "";
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private HospitalViewModel viewModel;
     private SharedPreferences sharedPrefs;
@@ -61,6 +62,34 @@ public class ChildInputDetailsFragment extends Fragment implements DatePickerDia
             }
         });
 
+        //Bundle Retrival
+        Bundle bundle = this.getArguments();
+        String data = bundle.getString("baby_name");
+        binding.babyNameEdittext.setText(data);
+        String data2 = bundle.getString("father_name");
+        binding.fatherNameEdittext.setText(data2);
+        String data3 = bundle.getString("mother_name");
+        binding.motherNameEdittext.setText(data3);
+        String data4 = bundle.getString("DOB");
+        binding.ageInYrsEdittext.setText(data4);
+        gender = bundle.getString("gender");
+        if(data.length() != 0){
+            binding.button.setText("Update");
+        }
+
+        binding.maleSelectionBabyForm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gender = "male";
+            }
+        });
+
+        binding.femaleSelectioinBabyForm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gender = "female";
+            }
+        });
 
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -75,6 +104,7 @@ public class ChildInputDetailsFragment extends Fragment implements DatePickerDia
         binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                binding.progressBarChildDetailFragment.setVisibility(View.VISIBLE);
                 savedata();
             }
         });
@@ -89,14 +119,17 @@ public class ChildInputDetailsFragment extends Fragment implements DatePickerDia
         String D = String.valueOf(Day);
         String M = String.valueOf(Month);
         String Y = String.valueOf(Year);
+        String G = gender;
         String ID = sharedPrefs.getString("User_id","nothing");
         Babydata bd = new Babydata(name,D,M,Y,"5",mother,father);
         viewModel.Register_Baby_detail(ID,bd);
         viewModel.getGetbabyResponse().observe(this, data->{
             if(data != null){
+                binding.progressBarChildDetailFragment.setVisibility(View.INVISIBLE);
                 Toast.makeText(getActivity(),"Details saved",Toast.LENGTH_SHORT).show();
                 setFragment(new BottomNavFragment());
             }else{
+                binding.progressBarChildDetailFragment.setVisibility(View.INVISIBLE);
                 Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
             }
         });

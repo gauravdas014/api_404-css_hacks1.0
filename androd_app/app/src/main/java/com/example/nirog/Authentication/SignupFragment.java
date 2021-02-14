@@ -38,6 +38,7 @@ public class SignupFragment extends Fragment {
     private FragmentSignupBinding binding;
     private HospitalViewModel viewModel;
     private SharedPreferences sharedPrefs;
+    private ChildInputDetailsFragment childInputDetailsFragment;
 
 
     @Override
@@ -49,6 +50,7 @@ public class SignupFragment extends Fragment {
         viewModel = new ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.
                 getInstance(getActivity().getApplication())).get(HospitalViewModel.class);
 
+        childInputDetailsFragment = new ChildInputDetailsFragment();
         sharedPrefs= PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         binding.signUpBtn.setOnClickListener(new View.OnClickListener() {
@@ -111,12 +113,25 @@ public class SignupFragment extends Fragment {
         viewModel.getSignUpResponse().observe(this, data->{
             if(data != null){
                 binding.progressBarSignUp.setVisibility(View.INVISIBLE);
-                String id = data.getUser_details().get_id();
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString("User_id",id);
-                editor.apply();
-                Toast.makeText(getActivity(),"Signup Successfull",Toast.LENGTH_SHORT).show();
-                setFragment(new ChildInputDetailsFragment());
+                String status = data.getStatus();
+                if(status.equals("fail")){
+                    Toast.makeText(getActivity(),"User already exit",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    String id = data.getUser_details().get_id();
+                    SharedPreferences.Editor editor = sharedPrefs.edit();
+                    editor.putString("User_id", id);
+                    editor.apply();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("baby_name","");
+                    bundle.putString("father_name","");
+                    bundle.putString("mother_name","");
+                    bundle.putString("DOB","");
+                    bundle.putString("gender","");
+                    childInputDetailsFragment.setArguments(bundle);
+                    Toast.makeText(getActivity(), "Signup Successfull", Toast.LENGTH_SHORT).show();
+                    setFragment(new ChildInputDetailsFragment());
+                }
             }else{
                 binding.progressBarSignUp.setVisibility(View.INVISIBLE);
                 Toast.makeText(getContext(), "There is some error", Toast.LENGTH_SHORT).show();
