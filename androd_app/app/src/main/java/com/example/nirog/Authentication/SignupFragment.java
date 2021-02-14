@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.preference.PreferenceManager;
 import android.text.Editable;
@@ -45,6 +46,9 @@ public class SignupFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentSignupBinding.inflate(inflater, container, false);
+
+        viewModel = new ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.
+                getInstance(getActivity().getApplication())).get(HospitalViewModel.class);
 
         sharedPrefs= PreferenceManager.getDefaultSharedPreferences(getActivity());
 
