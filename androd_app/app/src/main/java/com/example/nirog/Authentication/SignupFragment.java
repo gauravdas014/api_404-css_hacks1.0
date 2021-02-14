@@ -120,15 +120,8 @@ public class SignupFragment extends Fragment {
                 else {
                     String id = data.getUser_details().get_id();
                     SharedPreferences.Editor editor = sharedPrefs.edit();
-                    editor.putString("User_id", id);
+                    editor.putString("USER_iD", id);
                     editor.apply();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("baby_name","");
-                    bundle.putString("father_name","");
-                    bundle.putString("mother_name","");
-                    bundle.putString("DOB","");
-                    bundle.putString("gender","");
-                    childInputDetailsFragment.setArguments(bundle);
                     Toast.makeText(getActivity(), "Signup Successfull", Toast.LENGTH_SHORT).show();
                     setFragment(new ChildInputDetailsFragment());
                 }

@@ -3,6 +3,7 @@ package com.example.nirog.MainDestinations.Vaccine;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
@@ -17,14 +18,17 @@ import android.widget.Toast;
 
 import com.example.nirog.Account.ChildInputDetailsFragment;
 import com.example.nirog.Authentication.LoginFragment;
-import com.example.nirog.MainDestinations.Hospital.HospitalDetailsFragment;
 import com.example.nirog.MainDestinations.Hospital.HospitalListAdapter;
 import com.example.nirog.R;
 import com.example.nirog.Splash.SplashFragment;
 import com.example.nirog.ViewModel.HospitalViewModel;
-import com.example.nirog.data.model.HospitalDetails;
 import com.example.nirog.databinding.FragmentVaccineBinding;
-import com.google.android.material.transition.MaterialElevationScale;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVaccineCardClick {
@@ -78,20 +82,16 @@ public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVa
         sharedPrefs= PreferenceManager.getDefaultSharedPreferences(getActivity());
 
 
-        retrieveBabyData();
 
-        /*binding.babyNameTv.setOnClickListener(new View.OnClickListener() {
+        binding.babyNameTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences.Editor editor = sharedPrefs.edit();
                 editor.putString("User_id",null);
                 editor.apply();
                 setFragment(new LoginFragment());
-
             }
-        });*/
-
-
+        });
         hospitalViewModel.getAllVaccines();
         hospitalViewModel.getALLVaccinesRes().observe(this,data->{
             if(data != null){
@@ -103,16 +103,18 @@ public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVa
         });
 
 
+        retrieveBabyData();
 
         return binding.getRoot();
 
     }
 
+
     private void retrieveBabyData() {
         String userId = sharedPrefs.getString("User_id",null);
         hospitalViewModel.Get_Baby_Data(userId);
         Log.e(userId,"baby user id");
-        hospitalViewModel.getGetbabyResponse().observe(this, data->{
+        hospitalViewModel.getGetBabyDataResponse().observe(this, data->{
             if(data != null){
                 String name = data.getBaby_details().getName();
                 String Father = data.getBaby_details().getFatherName();
@@ -141,27 +143,9 @@ public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVa
         binding = null;
     }
 
+
     @Override
     public void onClickListener(int position, String vaccineId, String vaccineName, String whenToGive, String dose, String route, String site, String description) {
-        VaccineDetailsFragment vaccineDetailsFragment = VaccineDetailsFragment.newInstance(
-                vaccineName,
-                vaccineId,
-                whenToGive,
-                position,
-                dose,
-                route,
-                site,
-                description);
-
-
-        vaccineDetailsFragment.setEnterTransition(new MaterialElevationScale(true));
-        vaccineDetailsFragment.setExitTransition(new MaterialElevationScale(false));
-
-        //fragment transaction
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, vaccineDetailsFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
 
     }
 }
