@@ -143,7 +143,9 @@ exports.registerBaby = async (req, res) => {
 // Function to get baby details
 exports.getBabyDetails = async (req, res) => {
   try {
-    const baby = await Baby.findOne({ parent: req.params.parentId });
+    const baby = await Baby.findOne({ parent: req.params.parentId }).populate(
+      'vaccinesTaken'
+    );
     res.status(200).json({
       status: 'success',
       baby,
@@ -172,6 +174,45 @@ exports.editBabyDetails = async (req, res) => {
       baby: updatedBaby,
     });
   } catch (err) {
+    res.status(400).json({
+      status: 'fail',
+      message: err,
+    });
+  }
+};
+
+exports.vaccineTaken = async (req, res) => {
+  try {
+    const baby = await Baby.findById(req.body.babyId).populate('vaccinesTaken');
+    baby.vaccinesTaken.push(req.body.vaccineId);
+    await baby.save();
+    res.status(200).json({
+      status: 'success',
+      baby,
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'fail',
+      message: err,
+    });
+  }
+};
+
+exports.vaccineTakenRemove = async (req, res) => {
+  try {
+    const baby = await Baby.findById(req.body.babyId).populate('vaccinesTaken');
+    baby.vaccinesTaken.forEach((vaccine) => {
+      if (vaccine._id == req.body.vaccineId) {
+        baby.vaccinesTaken.splice(baby.vaccinesTaken.indexOf(vaccine), 1);
+      }
+    });
+    await baby.save();
+    res.status(200).json({
+      status: 'success',
+      baby,
+    });
+  } catch (err) {
+    console.log(err);
     res.status(400).json({
       status: 'fail',
       message: err,
