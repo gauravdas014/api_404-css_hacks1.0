@@ -3,12 +3,15 @@ package com.example.nirog.MainDestinations.Vaccine;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.nirog.R;
+import com.example.nirog.ViewModel.HospitalViewModel;
 import com.example.nirog.databinding.FragmentVaccineDetailsBinding;
 
 
@@ -22,6 +25,8 @@ public class VaccineDetailsFragment extends Fragment {
 
     //view binding
     private FragmentVaccineDetailsBinding binding;
+    //init view model
+    private HospitalViewModel viewModel;
 
 
     private String mVaccineName;
@@ -54,6 +59,9 @@ public class VaccineDetailsFragment extends Fragment {
             mWhenToGive = getArguments().getString(WHEN_TO_GIVE);
             mPosition = getArguments().getInt(POSITION);
         }
+
+        viewModel = new ViewModelProvider(this,
+                ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(HospitalViewModel.class);
     }
 
     @Override
@@ -61,6 +69,27 @@ public class VaccineDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentVaccineDetailsBinding.inflate(inflater, container, false);
+
+        //setting the text fields from the data of bundle
+        binding.vaccineNameDetailed.setText(mVaccineName);
+        binding.whenToGiveIt.setText(mWhenToGive);
+
+        //calling view model to get the additional data
+        //calling get vaccine api
+        viewModel.getVaccine(mVaccineId);
+
+        //getting the response
+        viewModel.getVaccineResponse().observe(this, data->{
+            if(data != null){
+                binding.dose.setText(data.getVacDetails().getDose());
+                binding.route.setText(data.getVacDetails().getRoute());
+                binding.site.setText(data.getVacDetails().getSite());
+                binding.description.setText(data.getVacDetails().getSmallDescription() + "\n" + data.getVacDetails().getDescription());
+            }else{
+                Toast.makeText(getContext(), "No Data Found", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
 
         return binding.getRoot();
