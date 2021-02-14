@@ -10,6 +10,7 @@ import com.example.nirog.data.model.ResponseGet_user;
 import com.example.nirog.data.model.ResponseHosDetails;
 import com.example.nirog.data.model.ResponseHospital;
 import com.example.nirog.data.model.ResponseLogin;
+import com.example.nirog.data.model.ResponseVacTaken;
 import com.example.nirog.data.model.ResponseVaccine;
 import com.example.nirog.data.model.ResponseVaccineDetails;
 import com.example.nirog.data.model.VTaken;
@@ -62,6 +63,6 @@ public interface ApiService {
     Call<RespomseBabyData> RemoveVaccine(@Body VTaken vTaken);
 
     @GET("api/vaccine/hospitalwise/all")
-    Call<ResponseVaccineDetails> GetAllVaccinesHosWise();
+    Call<ResponseVacTaken> GetAllVaccinesHosWise();
 
 }

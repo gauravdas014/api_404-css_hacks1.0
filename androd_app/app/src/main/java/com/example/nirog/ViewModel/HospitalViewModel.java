@@ -18,6 +18,7 @@ import com.example.nirog.data.model.ResponseGet_user;
 import com.example.nirog.data.model.ResponseHosDetails;
 import com.example.nirog.data.model.ResponseHospital;
 import com.example.nirog.data.model.ResponseLogin;
+import com.example.nirog.data.model.ResponseVacTaken;
 import com.example.nirog.data.model.ResponseVaccine;
 import com.example.nirog.data.model.ResponseVaccineDetails;
 import com.example.nirog.data.model.VTaken;
@@ -44,7 +45,7 @@ public class HospitalViewModel extends AndroidViewModel {
     private MutableLiveData<RespomseBabyData> getBabyDataResponse;
     private MutableLiveData<RespomseBabyData> addResponse;
     private MutableLiveData<RespomseBabyData> removeResponse;
-    private MutableLiveData<ResponseVaccineDetails> getVacHosWiseRes;
+    private MutableLiveData<ResponseVacTaken> getVacHosWiseRes;
 
 
 
@@ -64,7 +65,7 @@ public class HospitalViewModel extends AndroidViewModel {
         getBabyDataResponse = new MutableLiveData<RespomseBabyData>();
         addResponse = new MutableLiveData<RespomseBabyData>();
         removeResponse = new MutableLiveData<RespomseBabyData>();
-        getVacHosWiseRes = new MutableLiveData<ResponseVaccineDetails>();
+        getVacHosWiseRes = new MutableLiveData<ResponseVacTaken>();
     }
 
     public MutableLiveData<ResponseHosDetails> getAllHosDetailsRes()
@@ -121,7 +122,7 @@ public class HospitalViewModel extends AndroidViewModel {
         return removeResponse;
     }
 
-    public MutableLiveData<ResponseVaccineDetails> GetVacHosWiseRes()
+    public MutableLiveData<ResponseVacTaken> GetVacHosWiseRes()
     {
         return  getVacHosWiseRes;
     }
@@ -402,9 +403,9 @@ public class HospitalViewModel extends AndroidViewModel {
 
     public void getVaccineHosResponse()
     {
-        apiHelper.GetAllVaccinesHosWise().enqueue(new Callback<ResponseVaccineDetails>() {
+        apiHelper.GetAllVaccinesHosWise().enqueue(new Callback<ResponseVacTaken>() {
             @Override
-            public void onResponse(Call<ResponseVaccineDetails> call, Response<ResponseVaccineDetails> response) {
+            public void onResponse(Call<ResponseVacTaken> call, Response<ResponseVacTaken> response) {
                 if(response.code()<300){
                     getVacHosWiseRes.postValue(response.body());
                     Log.i("Api response: ",""+response.code());
@@ -416,7 +417,7 @@ public class HospitalViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(Call<ResponseVaccineDetails> call, Throwable t) {
+            public void onFailure(Call<ResponseVacTaken> call, Throwable t) {
                 getVacHosWiseRes.postValue(null);
             }
         });

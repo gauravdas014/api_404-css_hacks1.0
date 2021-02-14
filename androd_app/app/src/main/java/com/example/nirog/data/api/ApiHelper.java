@@ -15,6 +15,7 @@ import com.example.nirog.data.model.ResponseGet_user;
 import com.example.nirog.data.model.ResponseHosDetails;
 import com.example.nirog.data.model.ResponseHospital;
 import com.example.nirog.data.model.ResponseLogin;
+import com.example.nirog.data.model.ResponseVacTaken;
 import com.example.nirog.data.model.ResponseVaccine;
 import com.example.nirog.data.model.ResponseVaccineDetails;
 import com.example.nirog.data.model.VTaken;
@@ -103,7 +104,7 @@ public class ApiHelper implements ApiService{
     }
 
     @Override
-    public Call<ResponseVaccineDetails> GetAllVaccinesHosWise() {
+    public Call<ResponseVacTaken> GetAllVaccinesHosWise() {
         return api.GetAllVaccinesHosWise();
     }
 }

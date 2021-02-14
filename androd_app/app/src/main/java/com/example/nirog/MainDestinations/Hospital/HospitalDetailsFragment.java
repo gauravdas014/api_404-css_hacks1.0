@@ -135,7 +135,7 @@ public class HospitalDetailsFragment extends Fragment{
         viewModel.GetVacHosWiseRes().observe(this,data->{
             if(data!=null)
             {
-                vacDetailsAdapter = new VacDetailsAdapter(getContext(),data.getVaccineDetails());
+                vacDetailsAdapter = new VacDetailsAdapter(getContext(),data.getVac_detailsList());
                 binding.vaccineList.setAdapter(vacDetailsAdapter);
             }
             else

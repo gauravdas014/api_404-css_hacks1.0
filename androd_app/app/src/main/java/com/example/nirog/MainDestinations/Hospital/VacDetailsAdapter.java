@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.nirog.R;
+import com.example.nirog.data.model.Vac_Details;
 import com.example.nirog.data.model.VaccineDetails;
 
 import java.util.List;
@@ -18,9 +19,9 @@ import java.util.List;
 public class VacDetailsAdapter extends RecyclerView.Adapter<VacDetailsAdapter.VacdetailsViewHolder>{
 
     Context context;
-    List<VaccineDetails> vaccineDetails;
+    List<Vac_Details> vaccineDetails;
 
-    public VacDetailsAdapter(Context context,List<VaccineDetails> vaccineDetails) {
+    public VacDetailsAdapter(Context context,List<Vac_Details> vaccineDetails) {
         this.context = context;
         this.vaccineDetails = vaccineDetails;
     }
@@ -34,7 +35,7 @@ public class VacDetailsAdapter extends RecyclerView.Adapter<VacDetailsAdapter.Va
 
     @Override
     public void onBindViewHolder(@NonNull VacdetailsViewHolder holder, int position) {
-        VaccineDetails currentItem = vaccineDetails.get(position);
+        Vac_Details currentItem = vaccineDetails.get(position);
         holder.VaccineName.setText(currentItem.getName());
         holder.qty.setText(currentItem.getWhenToGive());
 
@@ -53,7 +54,7 @@ public class VacDetailsAdapter extends RecyclerView.Adapter<VacDetailsAdapter.Va
         public VacdetailsViewHolder(@NonNull View itemView) {
             super(itemView);
             VaccineName = itemView.findViewById(R.id.vaccine_name);
-            qty = itemView.findViewById(R.id.vaccine_qty);
+            qty = itemView.findViewById(R.id.when_to_get);
 
         }
 
