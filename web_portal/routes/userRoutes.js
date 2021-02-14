@@ -2,12 +2,14 @@ const express = require('express');
 const userController = require('../controllers/userController');
 const router = express.Router();
 
-router.route('/:userId').get(userController.getUser);
-router.route('/:userId').post(userController.editUser);
+router.route('/details/:userId').get(userController.getUser);
+router.route('/details/:userId').post(userController.editUser);
 
 router.route('/signup').post(userController.signup);
 
 router.route('/login').post(userController.login);
+
+router.route('/baby/details/:parentId').get(userController.getBabyDetails);
 
 router.route('/baby/register/:userId').post(userController.registerBaby);
 

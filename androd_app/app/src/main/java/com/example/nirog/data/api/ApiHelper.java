@@ -3,7 +3,10 @@ package com.example.nirog.data.api;
 import android.content.Context;
 
 import com.example.nirog.Retrofit.RetrofitProvider;
+import com.example.nirog.data.model.Babydata;
 import com.example.nirog.data.model.Login;
+import com.example.nirog.data.model.NEWSIGNUP;
+import com.example.nirog.data.model.RespomseBabyData;
 import com.example.nirog.data.model.ResponseDocDetails;
 import com.example.nirog.data.model.ResponseDoctor;
 import com.example.nirog.data.model.ResponseGet_user;
@@ -12,7 +15,7 @@ import com.example.nirog.data.model.ResponseHospital;
 import com.example.nirog.data.model.ResponseLogin;
 import com.example.nirog.data.model.ResponseVaccine;
 import com.example.nirog.data.model.ResponseVaccineDetails;
-import com.example.nirog.data.model.Signup;
+
 
 import retrofit2.Call;
 
@@ -66,17 +69,23 @@ public class ApiHelper implements ApiService{
     }
 
     @Override
-    public Call<ResponseLogin> signUp_User(Signup signup) {
-        return signUp_User(signup);
+    public Call<ResponseLogin> signUp_User(NEWSIGNUP signup) {
+        return api.signUp_User(signup);
     }
 
     @Override
     public Call<ResponseLogin> Login_user(Login login) {
-        return Login_user(login);
+        return api.Login_user(login);
     }
 
     @Override
     public Call<ResponseGet_user> GET_USER(String id) {
-        return GET_USER(id);
+        return api.GET_USER(id);
     }
+
+    @Override
+    public Call<RespomseBabyData> Register_Baby(String id,Babydata bd) { return api.Register_Baby(id,bd); }
+
+    @Override
+    public Call<RespomseBabyData> RetriveBabyData(String id) { return  api.RetriveBabyData(id); }
 }

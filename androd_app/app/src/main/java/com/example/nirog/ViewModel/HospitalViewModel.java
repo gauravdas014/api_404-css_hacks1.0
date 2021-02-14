@@ -8,7 +8,10 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.nirog.data.api.ApiHelper;
+import com.example.nirog.data.model.Babydata;
 import com.example.nirog.data.model.Login;
+import com.example.nirog.data.model.NEWSIGNUP;
+import com.example.nirog.data.model.RespomseBabyData;
 import com.example.nirog.data.model.ResponseDocDetails;
 import com.example.nirog.data.model.ResponseDoctor;
 import com.example.nirog.data.model.ResponseGet_user;
@@ -17,7 +20,7 @@ import com.example.nirog.data.model.ResponseHospital;
 import com.example.nirog.data.model.ResponseLogin;
 import com.example.nirog.data.model.ResponseVaccine;
 import com.example.nirog.data.model.ResponseVaccineDetails;
-import com.example.nirog.data.model.Signup;
+
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,6 +39,8 @@ public class HospitalViewModel extends AndroidViewModel {
     private MutableLiveData<ResponseLogin> signUpResponse;
     private MutableLiveData<ResponseLogin> LoginResponse;
     private MutableLiveData<ResponseGet_user> get_userResponse;
+    private MutableLiveData<RespomseBabyData> getbabyResponse;
+    private MutableLiveData<RespomseBabyData> getBabyDataResponse;
 
 
 
@@ -51,6 +56,8 @@ public class HospitalViewModel extends AndroidViewModel {
         signUpResponse = new MutableLiveData<ResponseLogin>();
         LoginResponse = new MutableLiveData<ResponseLogin>();
         get_userResponse = new MutableLiveData<ResponseGet_user>();
+        getbabyResponse = new MutableLiveData<RespomseBabyData>();
+        getBabyDataResponse = new MutableLiveData<RespomseBabyData>();
     }
 
     public MutableLiveData<ResponseHosDetails> getAllHosDetailsRes()
@@ -94,6 +101,8 @@ public class HospitalViewModel extends AndroidViewModel {
     {
         return LoginResponse;
     }
+    public MutableLiveData<RespomseBabyData> getGetbabyResponse() { return getbabyResponse; }
+    public MutableLiveData<RespomseBabyData> getGetBabyDataResponse() { return getBabyDataResponse; }
 
 
     public void getAllHospitals()
@@ -218,15 +227,17 @@ public class HospitalViewModel extends AndroidViewModel {
         });
     }
 
-    public void SignUp(Signup signup)
+    public void SignUp(NEWSIGNUP signup)
     {
         apiHelper.signUp_User(signup).enqueue(new Callback<ResponseLogin>() {
             @Override
             public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
                 if(response.code()<300) {
                     signUpResponse.postValue(response.body());
+                    Log.i("Api:",""+response.code());
                 }else if(response.code()>400) {
                     signUpResponse.postValue(null);
+                    Log.i("Api:",""+response.code());
                 }
             }
 
@@ -245,8 +256,10 @@ public class HospitalViewModel extends AndroidViewModel {
             public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
                 if(response.code()<300) {
                     LoginResponse.postValue(response.body());
+                    Log.i("Api:",""+response.code());
                 }else if(response.code()>400) {
                     LoginResponse.postValue(null);
+                    Log.i("Api:",""+response.code());
                 }
             }
 
@@ -276,4 +289,47 @@ public class HospitalViewModel extends AndroidViewModel {
             }
         });
     }
+
+    public  void Register_Baby_detail(String id, Babydata bd)
+    {
+        apiHelper.Register_Baby(id,bd).enqueue(new Callback<RespomseBabyData>() {
+            @Override
+            public void onResponse(Call<RespomseBabyData> call, Response<RespomseBabyData> response) {
+                if(response.code()<300){
+                    getbabyResponse.postValue(response.body());
+                }
+                else{
+                    getbabyResponse.postValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RespomseBabyData> call, Throwable t) {
+                    getbabyResponse.postValue(null);
+            }
+        });
+    }
+
+    public void Get_Baby_Data(String id)
+    {
+        apiHelper.RetriveBabyData(id).enqueue(new Callback<RespomseBabyData>() {
+            @Override
+            public void onResponse(Call<RespomseBabyData> call, Response<RespomseBabyData> response) {
+                if(response.code()<300){
+                    getbabyResponse.postValue(response.body());
+                    Log.i("Api response: ",""+response.code());
+                }
+                else{
+                    getbabyResponse.postValue(null);
+                    Log.i("Api response: ",""+response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RespomseBabyData> call, Throwable t) {
+
+            }
+        });
+    }
+
 }

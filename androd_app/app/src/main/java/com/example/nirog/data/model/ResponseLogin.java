@@ -9,7 +9,7 @@ public class ResponseLogin {
     @Expose
     private String status;
 
-    @SerializedName("User")
+    @SerializedName("user")
     @Expose
     private User_Details user_details;
 

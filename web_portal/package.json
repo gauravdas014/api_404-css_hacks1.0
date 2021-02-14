@@ -12,10 +12,13 @@
   "private": false,
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.15"
+    "mongoose": "^5.11.15",
+    "puppeteer": "^7.1.0",
+    "validator": "^13.5.2"
   }
 }
