@@ -1,5 +1,5 @@
 # api_404-css_hacks1.0
-##`**NIROG**`
+`**NIROG**`
 
 Though India's healthcare is one of the fastest growing in the world,lack of availability is a major concern for the country's tremendous population. Apart from 
 accessibility, awareness is a major deterrent to addressing health issues, both in terms of timely and quality care.
@@ -32,6 +32,7 @@ At present, our application mainly focuses on the new borns and the hospital aut
 ## `USE CASE`
 
 With the help of our application we are trying to creat an `ecosystem` which will  connect all the common people (both rural and urdan) and the medical authority (both private and government as well).
+
 ![Eco-System](https://user-images.githubusercontent.com/69760738/107870689-8c351f80-6ec0-11eb-8fcd-742c0853847c.png "ImageView")
 
 
