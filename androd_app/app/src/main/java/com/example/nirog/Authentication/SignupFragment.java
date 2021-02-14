@@ -107,7 +107,7 @@ public class SignupFragment extends Fragment {
     private void signup() {
         String email = binding.email.getText().toString();
         String pass = binding.confirmPassword.getText().toString();
-        NEWSIGNUP ss = new NEWSIGNUP("Raj kishan","rajkishan101@gmail.com","45874521410","Muzaffarpur","123456");
+        NEWSIGNUP ss = new NEWSIGNUP("Raj kishan",""+email,"45874521410","Muzaffarpur",""+pass);
         viewModel.SignUp(ss);
         viewModel.getSignUpResponse().observe(this, data->{
             if(data != null){
