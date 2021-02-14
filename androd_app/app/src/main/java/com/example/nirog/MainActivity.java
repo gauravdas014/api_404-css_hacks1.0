@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         //set up view binding for main activity
         mainBinding = ActivityMainBinding.inflate(getLayoutInflater());
 
-        setFragment(new LoginFragment());
+        setFragment(new SplashFragment());
 
         setContentView(mainBinding.getRoot());
     }
