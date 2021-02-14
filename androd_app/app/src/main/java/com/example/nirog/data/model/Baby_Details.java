@@ -3,6 +3,8 @@ package com.example.nirog.data.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Baby_Details {
 
     @SerializedName("_id")
@@ -34,9 +36,9 @@ public class Baby_Details {
 
     @SerializedName("vaccinesTaken")
     @Expose
-    private VaccineDetails vaccineDetails;
+    private List<VaccineDetails> vaccineDetails;
 
-    public Baby_Details(String _id, String name, String age, String parent, String motherName, String fatherName, Integer __v,VaccineDetails vaccineDetails) {
+    public Baby_Details(String _id, String name, String age, String parent, String motherName, String fatherName, Integer __v,List<VaccineDetails> vaccineDetails) {
         this._id = _id;
         this.name = name;
         this.age = age;
@@ -46,9 +48,6 @@ public class Baby_Details {
         this.__v = __v;
         this.vaccineDetails = vaccineDetails;
     }
-
-
-
 
 
     public String get_id() {
@@ -107,11 +106,11 @@ public class Baby_Details {
         this.__v = __v;
     }
 
-    public VaccineDetails getVaccineDetails() {
+    public List<VaccineDetails> getVaccineDetails() {
         return vaccineDetails;
     }
 
-    public void setVaccineDetails(VaccineDetails vaccineDetails) {
+    public void setVaccineDetails(List<VaccineDetails> vaccineDetails) {
         this.vaccineDetails = vaccineDetails;
     }
 }

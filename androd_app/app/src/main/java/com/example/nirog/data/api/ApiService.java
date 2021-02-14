@@ -10,8 +10,10 @@ import com.example.nirog.data.model.ResponseGet_user;
 import com.example.nirog.data.model.ResponseHosDetails;
 import com.example.nirog.data.model.ResponseHospital;
 import com.example.nirog.data.model.ResponseLogin;
+import com.example.nirog.data.model.ResponseVacTaken;
 import com.example.nirog.data.model.ResponseVaccine;
 import com.example.nirog.data.model.ResponseVaccineDetails;
+import com.example.nirog.data.model.VTaken;
 
 
 import retrofit2.Call;
@@ -53,5 +55,14 @@ public interface ApiService {
 
     @GET("api/user/baby/details/{parentId}")
     Call<RespomseBabyData> RetrieveBabyData(@Path("parentId") String id);
+
+    @POST("api/user/baby/taken/vaccine")
+    Call<RespomseBabyData> AddVaccinesTaken(@Body VTaken vTaken);
+
+    @POST("api/user/baby/remove/vaccine")
+    Call<RespomseBabyData> RemoveVaccine(@Body VTaken vTaken);
+
+    @GET("api/vaccine/hospitalwise/all")
+    Call<ResponseVacTaken> GetAllVaccinesHosWise();
 
 }
