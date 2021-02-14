@@ -11,11 +11,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.nirog.MainDestinations.Account.AccountFragment;
+import com.example.nirog.MainDestinations.Guide.GuideFragment;
 import com.example.nirog.MainDestinations.Hospital.HospitalFragment;
 import com.example.nirog.MainDestinations.Vaccine.VaccineFragment;
 import com.example.nirog.R;
 import com.example.nirog.databinding.FragmentBottomNavBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.transition.MaterialElevationScale;
 
 
 public class BottomNavFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener{
@@ -84,9 +87,11 @@ public class BottomNavFragment extends Fragment implements BottomNavigationView.
                 break;
             case R.id.guide_destination:
                 //TODO: Make guide fragment
+                setFragment(new GuideFragment());
                 break;
-            case R.id.settings_destination:
+            case R.id.account_destination:
                 //TODO: Make settings fragment
+                setFragment(new AccountFragment());
                 break;
         }
         return true;
@@ -94,6 +99,8 @@ public class BottomNavFragment extends Fragment implements BottomNavigationView.
 
 
     private void setFragment(Fragment fragment) {
+        fragment.setEnterTransition(new MaterialElevationScale(true));
+        fragment.setReturnTransition(new MaterialElevationScale(false));
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.destination_container,fragment);
         fragmentTransaction.commit();

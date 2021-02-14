@@ -5,126 +5,40 @@ import com.google.gson.annotations.SerializedName;
 
 public class VaccineDetails {
 
-    @SerializedName("createdAt")
-    @Expose
-    private String createdAt;
-
-    @SerializedName("dose")
-    @Expose
-    private String dose;
-
-    @SerializedName("site")
-    @Expose
-    private String site;
-
-    @SerializedName("route")
-    @Expose
-    private String route;
-
-    @SerializedName("smallDescription")
-    @Expose
-    private String smallDescription;
-
-    @SerializedName("__v")
-    @Expose
-    private Integer __v;
-
-    @SerializedName("name")
-    @Expose
-    private String name;
-
-    @SerializedName("description")
-    @Expose
-    private String description;
-
-    @SerializedName("_id")
-    @Expose
     private String _id;
 
-    @SerializedName("whenToGive")
-    @Expose
+    private String name;
+
     private String whenToGive;
 
-    @SerializedName("updatedAt")
-    @Expose
+    private String dose;
+
+    private String route;
+
+    private String site;
+
+    private String description;
+
+    private String smallDescription;
+
+    private String createdAt;
+
     private String updatedAt;
 
-    public VaccineDetails(String createdAt, String dose, String site, String route, String smallDescription, Integer __v, String name, String description, String _id, String whenToGive, String updatedAt) {
-        this.createdAt = createdAt;
-        this.dose = dose;
-        this.site = site;
-        this.route = route;
-        this.smallDescription = smallDescription;
-        this.__v = __v;
-        this.name = name;
-        this.description = description;
+    private int __v;
+
+    public VaccineDetails(String _id, String name, String whenToGive, String dose, String route, String site, String description, String smallDescription, String createdAt, String updatedAt, int __v) {
         this._id = _id;
-        this.whenToGive = whenToGive;
-        this.updatedAt = updatedAt;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getDose() {
-        return dose;
-    }
-
-    public void setDose(String dose) {
-        this.dose = dose;
-    }
-
-    public String getSite() {
-        return site;
-    }
-
-    public void setSite(String site) {
-        this.site = site;
-    }
-
-    public String getRoute() {
-        return route;
-    }
-
-    public void setRoute(String route) {
-        this.route = route;
-    }
-
-    public String getSmallDescription() {
-        return smallDescription;
-    }
-
-    public void setSmallDescription(String smallDescription) {
-        this.smallDescription = smallDescription;
-    }
-
-    public Integer get__v() {
-        return __v;
-    }
-
-    public void set__v(Integer __v) {
-        this.__v = __v;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
+        this.whenToGive = whenToGive;
+        this.dose = dose;
+        this.route = route;
+        this.site = site;
         this.description = description;
+        this.smallDescription = smallDescription;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.__v = __v;
     }
 
     public String get_id() {
@@ -135,6 +49,14 @@ public class VaccineDetails {
         this._id = _id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getWhenToGive() {
         return whenToGive;
     }
@@ -143,11 +65,67 @@ public class VaccineDetails {
         this.whenToGive = whenToGive;
     }
 
+    public String getDose() {
+        return dose;
+    }
+
+    public void setDose(String dose) {
+        this.dose = dose;
+    }
+
+    public String getRoute() {
+        return route;
+    }
+
+    public void setRoute(String route) {
+        this.route = route;
+    }
+
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getSmallDescription() {
+        return smallDescription;
+    }
+
+    public void setSmallDescription(String smallDescription) {
+        this.smallDescription = smallDescription;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public String getUpdatedAt() {
         return updatedAt;
     }
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public int get__v() {
+        return __v;
+    }
+
+    public void set__v(int __v) {
+        this.__v = __v;
     }
 }

@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,7 @@ import com.example.nirog.ViewModel.HospitalViewModel;
 import com.example.nirog.databinding.FragmentVaccineBinding;
 
 
-public class VaccineFragment extends Fragment {
+public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVaccineCardClick {
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -73,8 +74,7 @@ public class VaccineFragment extends Fragment {
         binding = FragmentVaccineBinding.inflate(inflater, container, false);
         sharedPrefs= PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-        hospitalViewModel.getAllVaccines();
-        retrieveBabyData();
+
 
         binding.babyNameTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,12 +83,13 @@ public class VaccineFragment extends Fragment {
                 editor.putString("User_id",null);
                 editor.apply();
                 setFragment(new LoginFragment());
+                retrieveBabyData();
             }
         });
-
+        hospitalViewModel.getAllVaccines();
         hospitalViewModel.getALLVaccinesRes().observe(this,data->{
             if(data != null){
-                adapter = new VaccineListAdapter(data.getVaccineDetails(), getContext());
+                adapter = new VaccineListAdapter(data.getVaccineDetails(), getContext(), this::onClickListener);
                 binding.upcomingVaccinesRecyclerView.setAdapter(adapter);
             }else{
                 Toast.makeText(getContext(), "There is some error", Toast.LENGTH_SHORT).show();
@@ -104,6 +105,7 @@ public class VaccineFragment extends Fragment {
     private void retrieveBabyData() {
         String userId = sharedPrefs.getString("User_id",null);
         hospitalViewModel.Get_Baby_Data(userId);
+        Log.e(userId,"baby user id");
         hospitalViewModel.getGetBabyDataResponse().observe(this, data->{
             if(data != null){
                 String name = data.getBaby_details().getName();
@@ -131,5 +133,10 @@ public class VaccineFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onClickListener(int position, String vaccineId, String vaccineName, String whenToGive) {
+
     }
 }
