@@ -173,6 +173,8 @@ public class HospitalViewModel extends AndroidViewModel {
     //doctor
     public void getAllDoctors(String hospitalId)
     {
+
+
         apiHelper.GetAllDoctors(hospitalId).enqueue(new Callback<ResponseDocDetails>() {
             @Override
             public void onResponse(Call<ResponseDocDetails> call, Response<ResponseDocDetails> response) {

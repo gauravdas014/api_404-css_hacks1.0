@@ -77,15 +77,21 @@ public class HospitalFragment extends Fragment implements HospitalListAdapter.On
         //setting the adapter with data using view model
         viewModel.getAllHospitals();
 
+        //showing the load animation
+        binding.loadingAnimation.setVisibility(View.VISIBLE);
+
         //getting the response
         viewModel.getAllHosDetailsRes().observe(this, data->{
             if(data != null){
+                binding.loadingAnimation.setVisibility(View.INVISIBLE);
                 adapter = new HospitalListAdapter(data.getHospitalDetailsList(), getContext(), this::onClick);
                 binding.hospitalListRecyclerView.setAdapter(adapter);
             }else{
+                binding.loadingAnimation.setVisibility(View.INVISIBLE);
                 Toast.makeText(getContext(), "There is some error", Toast.LENGTH_SHORT).show();
             }
         });
+
 
 
         return binding.getRoot();
