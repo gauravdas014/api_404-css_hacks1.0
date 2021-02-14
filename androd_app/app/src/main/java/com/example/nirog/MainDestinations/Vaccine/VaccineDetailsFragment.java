@@ -19,7 +19,7 @@ public class VaccineDetailsFragment extends Fragment {
 
 
     private static final String VACCINE_NAME = "param1";
-    private static final String VACCINE_ID = "param2";
+    private static final String DOSE = "param2";
     private static final String WHEN_TO_GIVE = "param2";
     private static final String POSITION = "0";
 
@@ -30,7 +30,7 @@ public class VaccineDetailsFragment extends Fragment {
 
 
     private String mVaccineName;
-    private String mVaccineId;
+    private String mDose;
     private String mWhenToGive;
     private int mPosition;
 
@@ -39,11 +39,11 @@ public class VaccineDetailsFragment extends Fragment {
     }
 
 
-    public static VaccineDetailsFragment newInstance(String vaccineName, String vaccineId, String whenToGive, int position) {
+    public static VaccineDetailsFragment newInstance(String vaccineName, String dose, String whenToGive, int position) {
         VaccineDetailsFragment fragment = new VaccineDetailsFragment();
         Bundle args = new Bundle();
         args.putString(VACCINE_NAME, vaccineName);
-        args.putString(VACCINE_ID, vaccineId);
+        args.putString(DOSE, dose);
         args.putString(WHEN_TO_GIVE, whenToGive);
         args.putInt(POSITION, position);
         fragment.setArguments(args);
@@ -54,7 +54,7 @@ public class VaccineDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mVaccineId = getArguments().getString(VACCINE_ID);
+            mDose = getArguments().getString(DOSE);
             mVaccineName = getArguments().getString(VACCINE_NAME);
             mWhenToGive = getArguments().getString(WHEN_TO_GIVE);
             mPosition = getArguments().getInt(POSITION);
@@ -74,21 +74,6 @@ public class VaccineDetailsFragment extends Fragment {
         binding.vaccineNameDetailed.setText(mVaccineName);
         binding.whenToGiveIt.setText(mWhenToGive);
 
-        //calling view model to get the additional data
-        //calling get vaccine api
-        viewModel.getVaccine(mVaccineId);
-
-        //getting the response
-        viewModel.getVaccineResponse().observe(this, data->{
-            if(data != null){
-                binding.dose.setText(data.getVacDetails().getDose());
-                binding.route.setText(data.getVacDetails().getRoute());
-                binding.site.setText(data.getVacDetails().getSite());
-                binding.description.setText(data.getVacDetails().getSmallDescription() + "\n" + data.getVacDetails().getDescription());
-            }else{
-                Toast.makeText(getContext(), "No Data Found", Toast.LENGTH_SHORT).show();
-            }
-        });
 
 
 

@@ -45,16 +45,8 @@ public class VaccineListAdapter extends RecyclerView.Adapter<VaccineListAdapter.
         holder.whenToGive.setText(currentItem.getWhenToGive());
 
         //handling card click events
-        holder.vaccineCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onVaccineCardClick.onClickListener(
-                        position,
-                        currentItem.get_id(),
-                        currentItem.getName(),
-                        currentItem.getWhenToGive());
-            }
-        });
+
+
     }
 
     @Override
