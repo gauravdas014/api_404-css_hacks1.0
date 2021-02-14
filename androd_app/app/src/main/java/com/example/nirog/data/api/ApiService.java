@@ -52,6 +52,6 @@ public interface ApiService {
     Call<RespomseBabyData> Register_Baby(@Path("userId") String id,@Body Babydata bd);
 
     @GET("api/user/baby/details/{parentId}")
-    Call<RespomseBabyData> RetriveBabyData(@Path("parentId") String id);
+    Call<RespomseBabyData> RetrieveBabyData(@Path("parentId") String id);
 
 }

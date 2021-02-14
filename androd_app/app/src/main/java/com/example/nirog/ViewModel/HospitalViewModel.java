@@ -298,7 +298,7 @@ public class HospitalViewModel extends AndroidViewModel {
                 if(response.code()<300){
                     getbabyResponse.postValue(response.body());
                 }
-                else{
+                else if(response.code()>400){
                     getbabyResponse.postValue(null);
                 }
             }
@@ -312,14 +312,14 @@ public class HospitalViewModel extends AndroidViewModel {
 
     public void Get_Baby_Data(String id)
     {
-        apiHelper.RetriveBabyData(id).enqueue(new Callback<RespomseBabyData>() {
+        apiHelper.RetrieveBabyData(id).enqueue(new Callback<RespomseBabyData>() {
             @Override
             public void onResponse(Call<RespomseBabyData> call, Response<RespomseBabyData> response) {
                 if(response.code()<300){
                     getbabyResponse.postValue(response.body());
                     Log.i("Api response: ",""+response.code());
                 }
-                else{
+                else if(response.code()>400){
                     getbabyResponse.postValue(null);
                     Log.i("Api response: ",""+response.code());
                 }

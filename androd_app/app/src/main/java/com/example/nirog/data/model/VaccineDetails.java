@@ -5,32 +5,48 @@ import com.google.gson.annotations.SerializedName;
 
 public class VaccineDetails {
 
-    @SerializedName("name")
-    @Expose
+    private String _id;
+
     private String name;
 
-    @SerializedName("whenToGive")
-    @Expose
     private String whenToGive;
 
-    @SerializedName("dose")
-    @Expose
     private String dose;
 
-    @SerializedName("route")
-    @Expose
     private String route;
 
-    @SerializedName("site")
-    @Expose
     private String site;
 
-    public VaccineDetails(String name, String whenToGive, String dose, String route, String site) {
+    private String description;
+
+    private String smallDescription;
+
+    private String createdAt;
+
+    private String updatedAt;
+
+    private int __v;
+
+    public VaccineDetails(String _id, String name, String whenToGive, String dose, String route, String site, String description, String smallDescription, String createdAt, String updatedAt, int __v) {
+        this._id = _id;
         this.name = name;
         this.whenToGive = whenToGive;
         this.dose = dose;
         this.route = route;
         this.site = site;
+        this.description = description;
+        this.smallDescription = smallDescription;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.__v = __v;
+    }
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
     public String getName() {
@@ -71,5 +87,45 @@ public class VaccineDetails {
 
     public void setSite(String site) {
         this.site = site;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getSmallDescription() {
+        return smallDescription;
+    }
+
+    public void setSmallDescription(String smallDescription) {
+        this.smallDescription = smallDescription;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public int get__v() {
+        return __v;
+    }
+
+    public void set__v(int __v) {
+        this.__v = __v;
     }
 }

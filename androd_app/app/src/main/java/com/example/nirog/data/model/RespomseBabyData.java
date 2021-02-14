@@ -4,6 +4,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class RespomseBabyData {
+
+    @SerializedName("status")
+    @Expose
     String status;
 
     @SerializedName("baby")

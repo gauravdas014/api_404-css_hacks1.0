@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +76,6 @@ public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVa
 
 
 
-        //logout
         binding.babyNameTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,10 +83,9 @@ public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVa
                 editor.putString("User_id",null);
                 editor.apply();
                 setFragment(new LoginFragment());
+                retrieveBabyData();
             }
         });
-
-        retrieveBabyData();
         hospitalViewModel.getAllVaccines();
         hospitalViewModel.getALLVaccinesRes().observe(this,data->{
             if(data != null){
@@ -97,6 +96,8 @@ public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVa
             }
         });
 
+
+
         return binding.getRoot();
 
     }
@@ -104,23 +105,23 @@ public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVa
     private void retrieveBabyData() {
         String userId = sharedPrefs.getString("User_id",null);
         hospitalViewModel.Get_Baby_Data(userId);
-        //Toast.makeText(getActivity(),""+userId,Toast.LENGTH_LONG).show();
+        Log.e(userId,"baby user id");
         hospitalViewModel.getGetBabyDataResponse().observe(this, data->{
             if(data != null){
                 String name = data.getBaby_details().getName();
                 String Father = data.getBaby_details().getFatherName();
                 String Mother = data.getBaby_details().getMotherName();
-                String Year = data.getBaby_details().getDateOfBirth() + data.getBaby_details().getMonthOfBirth() + data.getBaby_details().getYearOfBirth();
-                Toast.makeText(getActivity(),""+name+"/"+Father+"/"+Mother+"/"+Year,Toast.LENGTH_SHORT).show();
+                String Year = data.getBaby_details().getAge();
+                Toast.makeText(getActivity(),""+name+""+Father+""+Mother+""+Year,Toast.LENGTH_SHORT).show();
                 binding.babyNameTv.setText(name);
                 binding.babyFatherTv.setText(Father);
                 binding.babyMotherTv.setText(Mother);
                 binding.babyYearTv.setText(Year);
             }else{
-                Toast.makeText(getActivity(), "There is some error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "There is some error", Toast.LENGTH_SHORT).show();
             }
         });
-   }
+    }
 
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();

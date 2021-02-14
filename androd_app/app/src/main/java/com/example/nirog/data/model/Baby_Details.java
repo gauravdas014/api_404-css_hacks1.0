@@ -1,27 +1,55 @@
 package com.example.nirog.data.model;
 
-public class Baby_Details {
-    String _id;
-    String name;
-    String age;
-    String parent;
-    String motherName;
-    String fatherName;
-    String dateOfBirth;
-    String monthOfBirth;
-    String yearOfBirth;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-    public Baby_Details(String _id, String name, String age, String parent, String motherName, String fatherName, String dateOfBirth, String monthOfBirth, String yearOfBirth) {
+public class Baby_Details {
+
+    @SerializedName("_id")
+    @Expose
+    private String _id;
+
+    @SerializedName("name")
+    @Expose
+    private String name;
+
+    @SerializedName("age")
+    @Expose
+    private String age;
+
+    @SerializedName("parent")
+    @Expose
+    private String parent;
+
+    @SerializedName("motherName")
+    @Expose
+    private String motherName;
+
+    @SerializedName("fatherName")
+    @Expose
+    private String fatherName;
+
+    @SerializedName("__v")
+    private Integer __v;
+
+    @SerializedName("vaccinesTaken")
+    @Expose
+    private VaccineDetails vaccineDetails;
+
+    public Baby_Details(String _id, String name, String age, String parent, String motherName, String fatherName, Integer __v,VaccineDetails vaccineDetails) {
         this._id = _id;
         this.name = name;
         this.age = age;
         this.parent = parent;
         this.motherName = motherName;
         this.fatherName = fatherName;
-        this.dateOfBirth = dateOfBirth;
-        this.monthOfBirth = monthOfBirth;
-        this.yearOfBirth = yearOfBirth;
+        this.__v = __v;
+        this.vaccineDetails = vaccineDetails;
     }
+
+
+
+
 
     public String get_id() {
         return _id;
@@ -71,27 +99,19 @@ public class Baby_Details {
         this.fatherName = fatherName;
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
+    public Integer get__v() {
+        return __v;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void set__v(Integer __v) {
+        this.__v = __v;
     }
 
-    public String getMonthOfBirth() {
-        return monthOfBirth;
+    public VaccineDetails getVaccineDetails() {
+        return vaccineDetails;
     }
 
-    public void setMonthOfBirth(String monthOfBirth) {
-        this.monthOfBirth = monthOfBirth;
-    }
-
-    public String getYearOfBirth() {
-        return yearOfBirth;
-    }
-
-    public void setYearOfBirth(String yearOfBirth) {
-        this.yearOfBirth = yearOfBirth;
+    public void setVaccineDetails(VaccineDetails vaccineDetails) {
+        this.vaccineDetails = vaccineDetails;
     }
 }
