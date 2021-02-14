@@ -115,8 +115,7 @@ public class LoginFragment extends Fragment {
                 setFragment(new BottomNavFragment());
             }else{
                 binding.progresslogin.setVisibility(View.INVISIBLE);
-                String error = data.getStatus();
-                Toast.makeText(getContext(), ""+error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Login fail", Toast.LENGTH_SHORT).show();
             }
         });
     }

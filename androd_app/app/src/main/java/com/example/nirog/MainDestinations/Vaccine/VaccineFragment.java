@@ -1,18 +1,23 @@
 package com.example.nirog.MainDestinations.Vaccine;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.nirog.Authentication.LoginFragment;
 import com.example.nirog.MainDestinations.Hospital.HospitalListAdapter;
 import com.example.nirog.R;
+import com.example.nirog.Splash.SplashFragment;
 import com.example.nirog.ViewModel.HospitalViewModel;
 import com.example.nirog.databinding.FragmentVaccineBinding;
 
@@ -29,6 +34,7 @@ public class VaccineFragment extends Fragment {
     private VaccineListAdapter adapter;
 
     private HospitalViewModel hospitalViewModel;
+    private SharedPreferences sharedPrefs;
 
 
     private String mParam1;
@@ -64,8 +70,19 @@ public class VaccineFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentVaccineBinding.inflate(inflater, container, false);
+        sharedPrefs= PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         hospitalViewModel.getAllVaccines();
+
+        binding.babyNameTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                editor.putString("User_id",null);
+                editor.apply();
+                setFragment(new LoginFragment());
+            }
+        });
 
         hospitalViewModel.getALLVaccinesRes().observe(this,data->{
             if(data != null){
@@ -80,6 +97,12 @@ public class VaccineFragment extends Fragment {
 
         return binding.getRoot();
 
+    }
+
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container,fragment);
+        fragmentTransaction.addToBackStack(null).commit();
     }
 
     @Override

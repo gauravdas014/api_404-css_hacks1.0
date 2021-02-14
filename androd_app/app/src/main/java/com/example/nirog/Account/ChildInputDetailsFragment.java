@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class ChildInputDetailsFragment extends Fragment implements DatePickerDia
     private int Year=0;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private HospitalViewModel viewModel;
+    private SharedPreferences sharedPrefs;
 
 
     @Override
@@ -45,6 +47,8 @@ public class ChildInputDetailsFragment extends Fragment implements DatePickerDia
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentChildInputDetailsBinding.inflate(inflater, container, false);
+
+        sharedPrefs= PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         viewModel = new ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.
                 getInstance(getActivity().getApplication())).get(HospitalViewModel.class);
@@ -85,8 +89,9 @@ public class ChildInputDetailsFragment extends Fragment implements DatePickerDia
         String D = String.valueOf(Day);
         String M = String.valueOf(Month);
         String Y = String.valueOf(Year);
+        String ID = sharedPrefs.getString("User_id","nothing");
         Babydata bd = new Babydata(name,D,M,Y,"5",mother,father);
-        viewModel.Register_Baby_detail("6027c6a94eb9574f1d783967",bd);
+        viewModel.Register_Baby_detail(ID,bd);
         viewModel.getGetbabyResponse().observe(this, data->{
             if(data != null){
                 Toast.makeText(getActivity(),"Details saved",Toast.LENGTH_SHORT).show();
