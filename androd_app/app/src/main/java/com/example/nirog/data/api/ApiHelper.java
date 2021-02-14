@@ -85,4 +85,7 @@ public class ApiHelper implements ApiService{
 
     @Override
     public Call<RespomseBabyData> Register_Baby(String id,Babydata bd) { return api.Register_Baby(id,bd); }
+
+    @Override
+    public Call<RespomseBabyData> RetriveBabyData(String id) { return  api.RetriveBabyData(id); }
 }

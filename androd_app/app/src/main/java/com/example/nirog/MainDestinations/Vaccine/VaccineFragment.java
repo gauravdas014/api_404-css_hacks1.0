@@ -1,18 +1,24 @@
 package com.example.nirog.MainDestinations.Vaccine;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.nirog.Account.ChildInputDetailsFragment;
+import com.example.nirog.Authentication.LoginFragment;
 import com.example.nirog.MainDestinations.Hospital.HospitalListAdapter;
 import com.example.nirog.R;
+import com.example.nirog.Splash.SplashFragment;
 import com.example.nirog.ViewModel.HospitalViewModel;
 import com.example.nirog.databinding.FragmentVaccineBinding;
 
@@ -29,6 +35,7 @@ public class VaccineFragment extends Fragment {
     private VaccineListAdapter adapter;
 
     private HospitalViewModel hospitalViewModel;
+    private SharedPreferences sharedPrefs;
 
 
     private String mParam1;
@@ -64,8 +71,20 @@ public class VaccineFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentVaccineBinding.inflate(inflater, container, false);
+        sharedPrefs= PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         hospitalViewModel.getAllVaccines();
+        retrieveBabyData();
+
+        binding.babyNameTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                editor.putString("User_id",null);
+                editor.apply();
+                setFragment(new LoginFragment());
+            }
+        });
 
         hospitalViewModel.getALLVaccinesRes().observe(this,data->{
             if(data != null){
@@ -80,6 +99,32 @@ public class VaccineFragment extends Fragment {
 
         return binding.getRoot();
 
+    }
+
+    private void retrieveBabyData() {
+        String userId = sharedPrefs.getString("User_id",null);
+        hospitalViewModel.Get_Baby_Data(userId);
+        hospitalViewModel.getGetBabyDataResponse().observe(this, data->{
+            if(data != null){
+                String name = data.getBaby_details().getName();
+                String Father = data.getBaby_details().getFatherName();
+                String Mother = data.getBaby_details().getMotherName();
+                String Year = data.getBaby_details().getAge();
+                Toast.makeText(getActivity(),""+name+""+Father+""+Mother+""+Year,Toast.LENGTH_SHORT).show();
+                binding.babyNameTv.setText(name);
+                binding.babyFatherTv.setText(Father);
+                binding.babyMotherTv.setText(Mother);
+                binding.babyYearTv.setText(Year);
+            }else{
+                Toast.makeText(getContext(), "There is some error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container,fragment);
+        fragmentTransaction.addToBackStack(null).commit();
     }
 
     @Override
