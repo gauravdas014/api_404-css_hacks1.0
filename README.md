@@ -1,7 +1,7 @@
 # NIROG
 
 <p align="center">
-  <img src="./logo.png" />
+  <img height="300px" src="./logo.png" />
 </p>
 
 Though India's healthcare is one of the fastest growing in the world,lack of availability is a major concern for the country's tremendous population. Apart from
