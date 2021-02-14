@@ -1,6 +1,4 @@
-# api_404-css_hacks1.0
-
-`**NIROG**`
+# NIROG
 
 Though India's healthcare is one of the fastest growing in the world,lack of availability is a major concern for the country's tremendous population. Apart from
 accessibility, awareness is a major deterrent to addressing health issues, both in terms of timely and quality care.
