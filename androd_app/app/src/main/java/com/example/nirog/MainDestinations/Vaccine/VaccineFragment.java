@@ -23,7 +23,7 @@ import com.example.nirog.ViewModel.HospitalViewModel;
 import com.example.nirog.databinding.FragmentVaccineBinding;
 
 
-public class VaccineFragment extends Fragment {
+public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVaccineCardClick {
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -90,7 +90,7 @@ public class VaccineFragment extends Fragment {
         hospitalViewModel.getAllVaccines();
         hospitalViewModel.getALLVaccinesRes().observe(this,data->{
             if(data != null){
-                adapter = new VaccineListAdapter(data.getVaccineDetails(), getContext());
+                adapter = new VaccineListAdapter(data.getVaccineDetails(), getContext(), this::onClickListener);
                 binding.upcomingVaccinesRecyclerView.setAdapter(adapter);
             }else{
                 Toast.makeText(getContext(), "There is some error", Toast.LENGTH_SHORT).show();
@@ -132,5 +132,10 @@ public class VaccineFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onClickListener(int position, String vaccineId, String vaccineName, String whenToGive) {
+
     }
 }

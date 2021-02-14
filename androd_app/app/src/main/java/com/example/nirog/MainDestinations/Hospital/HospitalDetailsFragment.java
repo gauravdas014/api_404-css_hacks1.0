@@ -135,4 +135,10 @@ public class HospitalDetailsFragment extends Fragment{
 
         return binding.getRoot();
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 }

@@ -23,10 +23,12 @@ public class VaccineListAdapter extends RecyclerView.Adapter<VaccineListAdapter.
 
     List<VaccineDetails> vaccineRowItem;
     Context context;
+    OnVaccineCardClick onVaccineCardClick;
 
-    public VaccineListAdapter(List<VaccineDetails> vaccineRowItem, Context context) {
+    public VaccineListAdapter(List<VaccineDetails> vaccineRowItem, Context context, OnVaccineCardClick onVaccineCardClick) {
         this.vaccineRowItem = vaccineRowItem;
         this.context = context;
+        this.onVaccineCardClick = onVaccineCardClick;
     }
 
     @NonNull
@@ -41,6 +43,10 @@ public class VaccineListAdapter extends RecyclerView.Adapter<VaccineListAdapter.
         VaccineDetails currentItem = vaccineRowItem.get(position);
         holder.vaccineName.setText(currentItem.getName());
         holder.whenToGive.setText(currentItem.getWhenToGive());
+
+        //handling card click events
+
+
     }
 
     @Override
@@ -61,5 +67,7 @@ public class VaccineListAdapter extends RecyclerView.Adapter<VaccineListAdapter.
         }
     }
 
-
+    public interface OnVaccineCardClick{
+        public void onClickListener(int position, String vaccineId, String vaccineName, String whenToGive);
+    }
 }
