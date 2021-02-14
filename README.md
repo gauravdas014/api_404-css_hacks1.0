@@ -1,5 +1,9 @@
 # NIROG
 
+<p align="center">
+  <img src="./logo.png" />
+</p>
+
 Though India's healthcare is one of the fastest growing in the world,lack of availability is a major concern for the country's tremendous population. Apart from
 accessibility, awareness is a major deterrent to addressing health issues, both in terms of timely and quality care.
 
@@ -31,8 +35,6 @@ At present, our application mainly focuses on the new borns and the hospital aut
 - The hospital authority can register in our application and update all the details daily , through which all the common people will get to know regarding their services and can avail them.
 
 ## USE CASE
-
-<!-- ![Image](./use-cases.jpeg 'Eco-System') -->
 
 ![Eco-System](https://user-images.githubusercontent.com/69760738/107870689-8c351f80-6ec0-11eb-8fcd-742c0853847c.png 'ImageView')
 
