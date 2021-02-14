@@ -23,7 +23,7 @@ import com.example.nirog.ViewModel.HospitalViewModel;
 import com.example.nirog.databinding.FragmentVaccineBinding;
 
 
-public class VaccineFragment extends Fragment {
+public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVaccineCardClick {
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -131,5 +131,10 @@ public class VaccineFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onClickListener(int position, int vaccineId, String vaccineName, String whenToGive) {
+
     }
 }

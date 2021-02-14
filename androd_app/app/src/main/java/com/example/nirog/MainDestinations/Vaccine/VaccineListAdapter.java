@@ -60,4 +60,8 @@ public class VaccineListAdapter extends RecyclerView.Adapter<VaccineListAdapter.
             whenToGive = itemView.findViewById(R.id.when_to_get);
         }
     }
+
+    public interface OnVaccineCardClick{
+        public void onClickListener(int position, int vaccineId, String vaccineName, String whenToGive);
+    }
 }
