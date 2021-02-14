@@ -5,7 +5,7 @@
         android:color="@color/header_image"/>
 
     <corners
-        android:bottomLeftRadius="160dp"
-        android:bottomRightRadius="160dp"/>
+        android:bottomLeftRadius="100dp"
+        android:bottomRightRadius="100dp"/>
 
 </shape>
