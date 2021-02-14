@@ -41,7 +41,7 @@ public class SplashFragment extends Fragment {
 //                    setFragment(new LoginFragment());
 //                else
 //                    setFragment(new BottomNavFragment());
-                setFragment(new ChildInputDetailsFragment());
+                setFragment(new LoginFragment());
             }
         },600);
 
