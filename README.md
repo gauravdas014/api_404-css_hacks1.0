@@ -9,7 +9,7 @@ accessibility, awareness is a major deterrent to addressing health issues, both 
 
 By providing all the neccessary informations digitally to everyone, we can avoid the complications to much extend.
 
-# Application
+# Android Application
 
 Our application is basically a platform where the users will be able to see all the hospital in there nearby locality digitally.
 With the help of this,the users will be able to know what are the `vaccine` that are available in that particular hospital and the `availability range` as well and
