@@ -107,11 +107,34 @@ public class ChildInputDetailsFragment extends Fragment implements DatePickerDia
             @Override
             public void onClick(View v) {
                 binding.progressBarChildDetailFragment.setVisibility(View.VISIBLE);
-                savedata();
+                savedatafirebase();
             }
         });
 
         return binding.getRoot();
+    }
+
+    private void savedatafirebase() {
+        FirebaseAuth mAuth;
+        DatabaseReference databaseReference;
+
+        mAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Baby");
+        String user = mAuth.getCurrentUser().getUid();
+
+        String name = binding.babyNameEdittext.getText().toString();
+        String mother = binding.motherNameEdittext.getText().toString();
+        String father = binding.fatherNameEdittext.getText().toString();
+        String D = String.valueOf(Day);
+        String M = String.valueOf(Month);
+        String Y = String.valueOf(Year);
+
+        databaseReference.child(user).child("name").setValue(name);
+        databaseReference.child(user).child("father").setValue(father);
+        databaseReference.child(user).child("mother").setValue(mother);
+        databaseReference.child(user).child("gender").setValue(gender);
+        binding.progressBarChildDetailFragment.setVisibility(View.INVISIBLE);
+        setFragment(new BottomNavFragment());
     }
 
 
