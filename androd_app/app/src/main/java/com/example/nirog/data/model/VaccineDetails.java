@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class VaccineDetails {
 
+
     private String _id;
 
     private String name;

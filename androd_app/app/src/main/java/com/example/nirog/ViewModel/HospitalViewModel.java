@@ -44,6 +44,7 @@ public class HospitalViewModel extends AndroidViewModel {
     private MutableLiveData<RespomseBabyData> getBabyDataResponse;
     private MutableLiveData<RespomseBabyData> addResponse;
     private MutableLiveData<RespomseBabyData> removeResponse;
+    private MutableLiveData<ResponseVaccineDetails> getVacHosWiseRes;
 
 
 
@@ -63,6 +64,7 @@ public class HospitalViewModel extends AndroidViewModel {
         getBabyDataResponse = new MutableLiveData<RespomseBabyData>();
         addResponse = new MutableLiveData<RespomseBabyData>();
         removeResponse = new MutableLiveData<RespomseBabyData>();
+        getVacHosWiseRes = new MutableLiveData<ResponseVaccineDetails>();
     }
 
     public MutableLiveData<ResponseHosDetails> getAllHosDetailsRes()
@@ -117,6 +119,11 @@ public class HospitalViewModel extends AndroidViewModel {
     public MutableLiveData<RespomseBabyData> RemoveVaccinesRes()
     {
         return removeResponse;
+    }
+
+    public MutableLiveData<ResponseVaccineDetails> GetVacHosWiseRes()
+    {
+        return  getVacHosWiseRes;
     }
 
 
@@ -389,6 +396,28 @@ public class HospitalViewModel extends AndroidViewModel {
             @Override
             public void onFailure(Call<RespomseBabyData> call, Throwable t) {
                 removeResponse.postValue(null);
+            }
+        });
+    }
+
+    public void getVaccineHosResponse()
+    {
+        apiHelper.GetAllVaccinesHosWise().enqueue(new Callback<ResponseVaccineDetails>() {
+            @Override
+            public void onResponse(Call<ResponseVaccineDetails> call, Response<ResponseVaccineDetails> response) {
+                if(response.code()<300){
+                    getVacHosWiseRes.postValue(response.body());
+                    Log.i("Api response: ",""+response.code());
+                }
+                else if(response.code()>400){
+                    getVacHosWiseRes.postValue(null);
+                    Log.i("Api response: ",""+response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseVaccineDetails> call, Throwable t) {
+                getVacHosWiseRes.postValue(null);
             }
         });
     }

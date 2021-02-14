@@ -94,11 +94,16 @@ public class ApiHelper implements ApiService{
 
     @Override
     public Call<RespomseBabyData> AddVaccinesTaken(VTaken vTaken) {
-        return  AddVaccinesTaken(vTaken);
+        return  api.AddVaccinesTaken(vTaken);
     }
 
     @Override
     public Call<RespomseBabyData> RemoveVaccine(VTaken vTaken) {
-        return RemoveVaccine(vTaken);
+        return api.RemoveVaccine(vTaken);
+    }
+
+    @Override
+    public Call<ResponseVaccineDetails> GetAllVaccinesHosWise() {
+        return api.GetAllVaccinesHosWise();
     }
 }
