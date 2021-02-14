@@ -5,26 +5,49 @@ import com.google.gson.annotations.SerializedName;
 
 public class VaccineDetails {
 
+
+    @SerializedName("_id")
+    @Expose
     private String _id;
 
+    @SerializedName("name")
+    @Expose
     private String name;
 
+    @SerializedName("whenToGive")
+    @Expose
     private String whenToGive;
 
+    @SerializedName("dose")
+    @Expose
     private String dose;
 
+    @SerializedName("route")
+    @Expose
     private String route;
 
+    @SerializedName("size")
+    @Expose
     private String site;
 
+    @SerializedName("description")
+    @Expose
     private String description;
 
+    @SerializedName("smallDescription")
+    @Expose
     private String smallDescription;
 
+    @SerializedName("createdAt")
+    @Expose
     private String createdAt;
 
+    @SerializedName("updatedAt")
+    @Expose
     private String updatedAt;
 
+    @SerializedName("__v")
+    @Expose
     private int __v;
 
     public VaccineDetails(String _id, String name, String whenToGive, String dose, String route, String site, String description, String smallDescription, String createdAt, String updatedAt, int __v) {

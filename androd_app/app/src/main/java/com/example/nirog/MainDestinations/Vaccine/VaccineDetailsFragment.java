@@ -10,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.nirog.MainDestinations.Hospital.DoctorListAdapter;
 import com.example.nirog.R;
 import com.example.nirog.ViewModel.HospitalViewModel;
+import com.example.nirog.data.model.VTaken;
 import com.example.nirog.databinding.FragmentVaccineDetailsBinding;
 
 
@@ -104,11 +106,32 @@ public class VaccineDetailsFragment extends Fragment {
         binding.description.setText(mDescription);
         binding.dose.setText(mDose);
 
-
-
+        binding.confirmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SendDataToServer();
+            }
+        });
 
         return binding.getRoot();
     }
+
+    public void SendDataToServer()
+    {
+        VTaken vTaken = new VTaken("6028db558817ff0015d855b8",mVaccineId);
+        viewModel.AddVaccinesTaken(vTaken);
+        viewModel.AddVaccinesTakenRes().observe(this,data->{
+            if(data!=null)
+            {
+                Toast.makeText(getContext(), "SuccessFull!!", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(getContext(), "No data found", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     @Override
     public void onDestroyView() {

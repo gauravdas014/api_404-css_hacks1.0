@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.nirog.Account.ChildAccountFragment;
 import com.example.nirog.R;
 import com.example.nirog.ViewModel.HospitalViewModel;
 import com.example.nirog.databinding.FragmentHospitalDetailsBinding;
@@ -38,6 +39,7 @@ public class HospitalDetailsFragment extends Fragment{
     private HospitalViewModel viewModel;
 
     private DoctorListAdapter doctorListAdapter;
+    private VacDetailsAdapter vacDetailsAdapter;
 
 
     private String mHospitalName;
@@ -122,6 +124,19 @@ public class HospitalDetailsFragment extends Fragment{
             {
                 doctorListAdapter = new DoctorListAdapter(getContext(),data.getDoctorDetails());
                 binding.doctorsList.setAdapter(doctorListAdapter);
+            }
+            else
+            {
+                Toast.makeText(getContext(), "No data found", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        viewModel.getVaccineHosResponse();
+        viewModel.GetVacHosWiseRes().observe(this,data->{
+            if(data!=null)
+            {
+                vacDetailsAdapter = new VacDetailsAdapter(getContext(),data.getVac_detailsList());
+                binding.vaccineList.setAdapter(vacDetailsAdapter);
             }
             else
             {
