@@ -17,8 +17,8 @@
         android:title="Guide"/>
 
     <item
-        android:id="@+id/settings_destination"
-        android:icon="@drawable/ic_settings"
-        android:title="Settings"/>
+        android:id="@+id/account_destination"
+        android:icon="@drawable/ic_account"
+        android:title="Account"/>
 
 </menu>
