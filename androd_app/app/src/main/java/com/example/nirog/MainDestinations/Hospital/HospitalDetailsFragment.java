@@ -37,6 +37,8 @@ public class HospitalDetailsFragment extends Fragment{
     //initializing view model for getting hospital data
     private HospitalViewModel viewModel;
 
+    private DoctorListAdapter doctorListAdapter;
+
 
     private String mHospitalName;
     private String mAddress;
@@ -113,6 +115,20 @@ public class HospitalDetailsFragment extends Fragment{
                 Toast.makeText(getContext(), "No data found", Toast.LENGTH_SHORT).show();
             }
         });
+
+        viewModel.getAllDoctors(mId);
+        viewModel.getAllDoctorsRes().observe(this,data->{
+            if(data!=null)
+            {
+                doctorListAdapter = new DoctorListAdapter(getContext(),data.getDoctorDetails());
+                binding.doctorsList.setAdapter(doctorListAdapter);
+            }
+            else
+            {
+                Toast.makeText(getContext(), "No data found", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
 
 
