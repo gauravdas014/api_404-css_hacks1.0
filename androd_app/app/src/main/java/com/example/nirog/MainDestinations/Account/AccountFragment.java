@@ -1,9 +1,11 @@
 package com.example.nirog.MainDestinations.Account;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ public class AccountFragment extends Fragment {
     //view binding
     private FragmentAccountBinding binding;
 
+    private SharedPreferences sharedPrefs;
 
 
 
@@ -26,7 +29,14 @@ public class AccountFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentAccountBinding.inflate(inflater, container, false);
 
+        sharedPrefs= PreferenceManager.getDefaultSharedPreferences(getActivity());
 
+        binding.buttonLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         return binding.getRoot();
     }
