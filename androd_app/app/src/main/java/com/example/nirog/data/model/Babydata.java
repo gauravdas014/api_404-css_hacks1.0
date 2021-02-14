@@ -1,13 +1,39 @@
 package com.example.nirog.data.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Babydata {
-    String name;
-    String dateOfBirth;
-    String monthOfBirth;
-    String yearOfBirth;
-    String age;
-    String motherName;
-    String fatherName;
+
+    @SerializedName("name")
+    @Expose
+    private String name;
+
+    @SerializedName("dateOfBirth")
+    @Expose
+    private String dateOfBirth;
+
+    @SerializedName("monthOfBirth")
+    @Expose
+    private String monthOfBirth;
+
+    @SerializedName("yearOfBirth")
+    @Expose
+    private String yearOfBirth;
+
+    @SerializedName("age")
+    @Expose
+    private String age;
+
+    @SerializedName("motherName")
+    @Expose
+    private String motherName;
+
+    @SerializedName("fatherName")
+    @Expose
+    private String fatherName;
+
+
 
     public Babydata(String name, String dateOfBirth, String monthOfBirth, String yearOfBirth, String age, String motherName, String fatherName) {
         this.name = name;
@@ -17,6 +43,7 @@ public class Babydata {
         this.age = age;
         this.motherName = motherName;
         this.fatherName = fatherName;
+
     }
 
     public String getName() {
@@ -74,4 +101,8 @@ public class Babydata {
     public void setFatherName(String fatherName) {
         this.fatherName = fatherName;
     }
+
+
+
+
 }

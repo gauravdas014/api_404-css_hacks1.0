@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +75,6 @@ public class VaccineFragment extends Fragment {
         sharedPrefs= PreferenceManager.getDefaultSharedPreferences(getActivity());
 
 
-        retrieveBabyData();
 
         binding.babyNameTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +83,7 @@ public class VaccineFragment extends Fragment {
                 editor.putString("User_id",null);
                 editor.apply();
                 setFragment(new LoginFragment());
+                retrieveBabyData();
             }
         });
         hospitalViewModel.getAllVaccines();
@@ -104,6 +105,7 @@ public class VaccineFragment extends Fragment {
     private void retrieveBabyData() {
         String userId = sharedPrefs.getString("User_id",null);
         hospitalViewModel.Get_Baby_Data(userId);
+        Log.e(userId,"baby user id");
         hospitalViewModel.getGetBabyDataResponse().observe(this, data->{
             if(data != null){
                 String name = data.getBaby_details().getName();
@@ -119,7 +121,7 @@ public class VaccineFragment extends Fragment {
                 Toast.makeText(getContext(), "There is some error", Toast.LENGTH_SHORT).show();
             }
         });
-   }
+    }
 
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
