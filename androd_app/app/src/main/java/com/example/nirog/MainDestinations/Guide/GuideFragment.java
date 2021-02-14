@@ -1,4 +1,4 @@
-package com.example.nirog.MainDestinations.Account;
+package com.example.nirog.MainDestinations.Guide;
 
 import android.os.Bundle;
 
@@ -9,29 +9,29 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.nirog.R;
-import com.example.nirog.databinding.FragmentAccountBinding;
+import com.example.nirog.databinding.FragmentGuideBinding;
 
 
-public class AccountFragment extends Fragment {
+public class GuideFragment extends Fragment {
 
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     //view binding
-    private FragmentAccountBinding binding;
+    private FragmentGuideBinding binding;
 
 
     private String mParam1;
     private String mParam2;
 
-    public AccountFragment() {
+    public GuideFragment() {
         // Required empty public constructor
     }
 
 
-    public static AccountFragment newInstance(String param1, String param2) {
-        AccountFragment fragment = new AccountFragment();
+    public static GuideFragment newInstance(String param1, String param2) {
+        GuideFragment fragment = new GuideFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -52,13 +52,7 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentAccountBinding.inflate(inflater, container, false);
+        binding = FragmentGuideBinding.inflate(inflater, container, false);
         return binding.getRoot();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
     }
 }
