@@ -34,10 +34,9 @@ At present, our application mainly focuses on the new borns and the hospital aut
 
 ## `USE CASE`
 
-![alt text](./use-cases.jpeg)
+![Image](./use-cases.jpeg 'Eco-System')
 
 With the help of our application we are trying to creat an `ecosystem` which will connect all the common people (both rural and urdan) and the medical authority (both private and government as well).
-![Image](C:\Users\SHARMISTHA DAS\Downloads "Eco-System")
 
 ## `Conclusion`
 
