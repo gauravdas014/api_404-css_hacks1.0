@@ -104,10 +104,36 @@ public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVa
         });
 
 
-        retrieveBabyData();
+        retrieveBabyDataFirebase();
 
         return binding.getRoot();
 
+    }
+
+    private void retrieveBabyDataFirebase() {
+        FirebaseAuth mAuth;
+        DatabaseReference databaseReference;
+
+        mAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Baby");
+        String user = mAuth.getCurrentUser().getUid();
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    String name = snapshot.child(user).child("name").getValue(String.class);
+                    String father = snapshot.child(user).child("father").getValue(String.class);
+                    binding.babyNameTv.setText(name);
+                    binding.babyFatherTv.setText(father);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 
