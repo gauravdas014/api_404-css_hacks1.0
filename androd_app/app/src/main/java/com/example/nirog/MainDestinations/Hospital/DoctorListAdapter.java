@@ -9,19 +9,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.nirog.R;
 import com.example.nirog.data.model.DoctorDetails;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.List;
 
-public class DoctosListAdapter extends RecyclerView.Adapter<DoctosListAdapter.DoctorViewHolder> {
+public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.DoctorViewHolder> {
 
     Context context;
     List<DoctorDetails> doctorDetailsList;
 
-    public DoctosListAdapter(Context context, List<DoctorDetails> doctorDetailsList) {
+    public DoctorListAdapter(Context context, List<DoctorDetails> doctorDetailsList) {
         this.context = context;
         this.doctorDetailsList = doctorDetailsList;
     }
