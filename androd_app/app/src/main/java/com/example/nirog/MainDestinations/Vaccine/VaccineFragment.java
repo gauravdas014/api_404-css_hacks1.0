@@ -17,11 +17,14 @@ import android.widget.Toast;
 
 import com.example.nirog.Account.ChildInputDetailsFragment;
 import com.example.nirog.Authentication.LoginFragment;
+import com.example.nirog.MainDestinations.Hospital.HospitalDetailsFragment;
 import com.example.nirog.MainDestinations.Hospital.HospitalListAdapter;
 import com.example.nirog.R;
 import com.example.nirog.Splash.SplashFragment;
 import com.example.nirog.ViewModel.HospitalViewModel;
+import com.example.nirog.data.model.HospitalDetails;
 import com.example.nirog.databinding.FragmentVaccineBinding;
+import com.google.android.material.transition.MaterialElevationScale;
 
 
 public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVaccineCardClick {
@@ -136,7 +139,26 @@ public class VaccineFragment extends Fragment implements VaccineListAdapter.OnVa
     }
 
     @Override
-    public void onClickListener(int position, String vaccineId, String vaccineName, String whenToGive) {
+    public void onClickListener(int position, String vaccineId, String vaccineName, String whenToGive, String dose, String route, String site, String description) {
+        VaccineDetailsFragment vaccineDetailsFragment = VaccineDetailsFragment.newInstance(
+                vaccineName,
+                vaccineId,
+                whenToGive,
+                position,
+                dose,
+                route,
+                site,
+                description);
+
+
+        vaccineDetailsFragment.setEnterTransition(new MaterialElevationScale(true));
+        vaccineDetailsFragment.setExitTransition(new MaterialElevationScale(false));
+
+        //fragment transaction
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, vaccineDetailsFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
 
     }
 }
