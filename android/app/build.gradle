@@ -66,7 +66,7 @@ dependencies {
     // Annotation processor
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
-    def lottieVersion = "3.7.0"
+    def lottieVersion = "4.2.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
 
